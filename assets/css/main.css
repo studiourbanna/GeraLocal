@@ -466,7 +466,7 @@ form.example::after {
 .text-block {
     position: absolute;
     top: 45%;
-    bottom: 35%;
+    bottom: 15%;
     right: 0px;
     background-color: #00000085;
     color: white;
@@ -492,4 +492,11 @@ form.example::after {
 	margin-bottom: 10px;
 	margin-top: 10px;
 	width: 100%;
+}
+
+.btnslide{
+	float: left;
+    width: auto;
+    padding: 15px;
+    background-color: #bbbbbb;
 }
