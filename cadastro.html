@@ -1,0 +1,46 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+	</head>
+	<body>
+		<form action="action_page.php" style="border:1px solid #ccc">
+			<div class="container">
+				<h1>Sign Up</h1>
+				<p>Please fill in this form to create an account.</p>
+			<hr>
+
+			<label for="email"><b class="label">E-mail</b></label>
+			<input type="text" placeholder="informe seu e-mail" name="email" required>
+
+			<label for="psw"><b class="label">Senha</b></label>
+			<input type="password" placeholder="informe sua senha" name="psw" required>
+
+			<label for="psw-repeat"><b class="label">Confirme sua Senha</b></label>
+			<input type="password" placeholder="repita sua senha" name="psw-repeat" required>
+
+			<label>
+				<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Me Lembra
+			</label>
+
+			<p>Ao criar sua conta, você informa que está ciente dos <a href="#" style="color:dodgerblue">Termos & Privacidade</a>.</p>
+
+			<div class="clearfix">
+			  <button type="button" class="cancelbtn">Cancelar</button>
+			  <button type="submit" class="signupbtn">Cadastrar</button>
+			</div>
+		  </div>
+		</form>
+	</body>
+	<script>
+	// Get the modal
+	var modal = document.getElementById('id02');
+
+	// When the user clicks anywhere outside of the modal, close it
+	window.onclick = function(event) {
+		if (event.target == modal) {
+			modal.style.display = "none";
+		}
+	}
+</script>
+</html>

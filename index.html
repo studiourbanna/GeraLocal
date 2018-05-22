@@ -1,0 +1,450 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Futuro GeraLocal</title>
+		<link rel="stylesheet" type="text/css" href="assets/css/main.css">
+		<script src="assets/css/slides.js"></script>
+	</head>
+	<body>
+		<div class="w3-top">
+			<div class="w3-bar w3-black w3-card">
+				<a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" 
+					href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+				<a href="index" class="w3-bar-item w3-button w3-padding-large logo">Início</a>
+				<div class="header-right">
+					<a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small" 
+						onclick="document.getElementById('id01').style.display='block'">Entrar</a>
+						
+					<a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small" 
+						onclick="document.getElementById('id02').style.display='block'">Cadastrar</a>
+					
+					<a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contato</a>
+						
+					<a href="#" onclick="document.getElementById('id03').style.display='block'" 
+						class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Navbar on small screens -->
+		<div id="navDemo" class="w3-bar-block w3-black w3-hide w3-hide-large w3-hide-medium w3-top" style="margin-top:46px">
+			<a class="w3-bar-item w3-button w3-padding-large w3-hide-medium w3-hide-large w3-right" 
+			href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+				
+			<a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small" 
+				onclick="document.getElementById('id01').style.display='block'">Entrar</a>
+				
+			<a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small" 
+				onclick="document.getElementById('id02').style.display='block'">Cadastrar</a>
+					
+			<a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contato</a>
+					
+			<a href="#" onclick="document.getElementById('id03').style.display='block'" 
+				class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
+		</div>
+			
+		<!-- The Login Modal -->
+		<div id="id01" class="modal">
+			<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<!-- Modal Content -->
+			<form action="acao.php" style="border:1px solid #ccc">
+				<!--<div class="imgcontainer"><img src="media/images/avatar_milla.png" alt="Avatar" class="avatar" /></div>-->
+				<div class="container cmodal">
+					<h1>Login</h1>
+					<p>entre no sistema</p>
+					<hr/>
+					<label for="uname"><b class="label">Usuário</b></label>
+					<input type="text" placeholder="informe o usuário" name="uname" required>
+					
+					<label for="psw"><b class="label">Senha</b></label>
+					<input type="password" placeholder="informe a senha" name="psw" required>
+				
+					<label><input type="checkbox" checked="checked" name="remember">Me lembre</label>
+				</div>
+				<div class="container_buttons">
+					<button type="submit" class="signupbtn" style="margin: 15px">Entrar</button>
+					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
+					<a href="#">Esqueceu a senha?</a>
+				</div>
+			</form>
+		</div>
+					
+		<!-- The Signup Modal -->
+		<div id="id02" class="modal">
+			<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<form action="acao.php" style="border:1px solid #ccc">
+				<div class="container cmodal">
+					<h1>Cadastrar</h1>
+					<p>por favor, complete o formulario para se registrar</p>
+					<hr/>
+						
+					<label for="email"><b class="label">E-mail</b></label>
+					<input type="text" placeholder="informe seu e-mail" name="email" required>
+						
+					<label for="psw"><b class="label">Senha</b></label>
+					<input type="password" placeholder="informe sua senha" name="psw" required>
+					<label for="psw-repeat"><b class="label">Confirme sua Senha</b></label>
+					<input type="password" placeholder="repita sua senha" name="psw-repeat" required>
+					<label>
+						<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Me Lembra
+						<input type="checkbox" checked="checked" name="remember" style="margin-bottom:15px">Concordo com os Termos
+					</label>
+					<div class="container_buttons">
+					<!--<a href="#" style="color:dodgerblue">Ler os Termos & Privacidade</a>.-->
+						<a href="#">Ler os Termos & Privacidade</a>.
+						<button type="button" onclick="document.getElementById('id02').style.display='none'"class="cancelbtn">Cancelar</button>
+						<button type="submit" class="signupbtn" style="margin: 15px">Cadastrar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+				
+		<!--The Search Modal-->
+		<div id="id03" class="modal">
+			<span class="close" onclick="document.getElementById('id03').style.display='none'" title="Close Modal">&times;</span>
+			<form action="acao.php" style="border:1px solid #ccc">
+				<div class="container cmodal">
+					<h1>Pesquisar</h1>
+					<p>digite e clique no botão para pesquisar</p>
+					<hr/>
+				
+					<input type="text" placeholder="Pesquisar.." name="search">
+					<button type="submit" class="button_search"><i class="fa fa-search"></i></button>
+				</div>
+			</form>
+		</div>
+		
+		<!-- Container for the image gallery -->
+		<div class="slideshow-container">
+			<!-- Full-width images with number text -->
+			<div class="mySlides fade">
+				<div class="container">
+					<div class="parallax"><img src="media/images/img01.jpg" style="width: 100%; height: 500px"></div>
+					<div class="text-block"> 
+						<h4>Nature</h4>
+						<p>What a beautiful sunrise</p>
+					</div>
+				</div>					  
+			</div>
+
+			<div class="mySlides fade">
+				<div class="container">
+					<div class="parallax"><img src="media/images/img02.jpg" style="width:100%; height: 500px"></div>
+					<div class="text-block"> 
+						<h4>Nature</h4>
+						<p>What a beautiful sunrise</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="mySlides fade">
+				<div class="container">
+					<div class="parallax"><img src="media/images/img01.jpg" style="width: 100%; height: 500px"></div>
+					<div class="text-block"> 
+						<h4>Nature</h4>
+						<p>What a beautiful sunrise</p>
+					</div>
+				</div>					  
+			</div>
+
+			<div class="mySlides fade">
+				<div class="container">
+					<div class="parallax"><img src="media/images/img02.jpg" style="width:100%; height: 500px"></div>
+					<div class="text-block"> 
+						<h4>Nature</h4>
+						<p>What a beautiful sunrise</p>
+					</div>
+				</div>
+			</div>
+			
+			<div class="mySlides fade">
+				<div class="container">
+					<div class="parallax"><img src="media/images/img01.jpg" style="width: 100%; height: 500px"></div>
+					<div class="text-block"> 
+						<h4>Nature</h4>
+						<p>What a beautiful sunrise</p>
+					</div>
+				</div>					  
+			</div>
+
+			<div class="mySlides fade">
+				<div class="container">
+					<div class="parallax"><img src="media/images/img02.jpg" style="width:100%; height: 500px"></div>
+					<div class="text-block"> 
+						<h4>Nature</h4>
+						<p>What a beautiful sunrise</p>
+					</div>
+				</div>
+			</div>
+
+			<!-- Next and previous buttons -->
+			<a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+			<a class="next" onclick="plusSlides(1)">&#10095;</a>
+
+			<div style="text-align:center">
+				<span class="dot" onclick="currentSlide(1)"></span> 
+				<span class="dot" onclick="currentSlide(2)"></span> 
+				<span class="dot" onclick="currentSlide(3)"></span> 
+				<span class="dot" onclick="currentSlide(4)"></span> 
+				<span class="dot" onclick="currentSlide(5)"></span> 
+				<span class="dot" onclick="currentSlide(6)"></span> 
+			</div>
+		</div>
+		<!-- Categorias -->
+		<div class="w3-container w3-padding-64 w3-center" id="team">
+			<h2>Está Procurando Algo?</h2>
+			<p>Confira todas as nossas ofertas para:</p>
+			<br/>
+			<div class="w3-row">
+				<div class="w3-quarter">
+					<div style="font-size:3em; color:Tomato"><i class="fas fa-utensils"></i></div>
+					<h4>Alimentação</h4>
+					<button class="btnstore">Ver Ofertas</button>
+				</div>
+
+				<div class="w3-quarter">
+					<div style="font-size:3em; color:Tomato"><i class="fas fa-tshirt"></i></div>
+					<h4>Vestimentas</h4>
+					<button class="btnstore">Ver Ofertas</button>
+				</div>
+
+				<div class="w3-quarter">
+					<div style="font-size:3em; color:Tomato"><i class="fas fa-desktop"></i></div>
+					<h4>Tecnologia</h4>
+					<button class="btnstore">Ver Ofertas</button>
+				</div>
+
+				<div class="w3-quarter">
+					<div style="font-size:3em; color:Tomato"><i class="fas fa-camera-retro"></i></div>
+					<h4>Diversão</h4>
+					<button class="btnstore">Ver Ofertas</button>
+				</div>
+			</div>
+		</div>
+
+		<!-- Ofertas -->
+		<div class="w3-row-padding w3-padding-64 w3-theme-l1" id="work">
+			<div class="w3-quarter">
+				<h2>Loja em Destaque</h2>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img02.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					  </div>
+				  </div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<!-- Mais Ofertas -->
+		<div class="w3-row-padding w3-padding-64 w3-center-11" id="work">
+			<h2 style="text-align: center">Mais Ofertas</h2>
+			<br/>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img02.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					  </div>
+				  </div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img02.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		<div class="w3-row-padding w3-padding-64 w3-center-11" id="work">
+			<br/>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img02.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					  </div>
+				  </div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img02.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+		
+		<div class="w3-row-padding w3-padding-64 w3-center-11" id="work">
+			<br/>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img02.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img01.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					  </div>
+				  </div>
+			</div>
+			<div class="w3-quarter">
+				<div class="w3-card w3-white">
+					<img src="media/images/img02.jpg" alt="Vernazza" style="width:100%">
+					<div class="w3-container">
+						<h3>Item</h3>
+						<br/>
+						<h4><sup>De: R$00,00</sup></h4>
+						<h3><sub>Para: R$00,00</sub></h3>
+						<button class="btnfeatureshop">Comprar</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
+			<i class="fab fa-facebook-f w3-hover-opacity"></i>
+			<i class="fab fa-instagram w3-hover-opacity"></i>
+			<i class="fab fa-snapchat-ghost w3-hover-opacity"></i>
+			<i class="fab fa-pinterest-p w3-hover-opacity"></i>
+			<i class="fab fa-twitter w3-hover-opacity"></i>
+			<i class="fab fa-linkedin-in w3-hover-opacity"></i>
+			<p class="w3-medium">Feito por <a href="http://clcmo.github.io">CLCMO</a> | 
+			Com <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+		</footer>
+		<script>
+			var slideIndex = 1;
+			showSlides(slideIndex);
+
+			function plusSlides(n) {
+				showSlides(slideIndex += n);
+			}
+
+			function currentSlide(n) {
+				showSlides(slideIndex = n);
+			}
+		</script>
+	</body>
+</html>
