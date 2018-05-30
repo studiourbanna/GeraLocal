@@ -36,10 +36,11 @@
 				
 			<a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small" 
 				onclick="document.getElementById('id02').style.display='block'">Cadastrar</a>
+				
+			<a href="#" class="w3-bar-item w3-button w3-padding-large w3-hide-small"
+				onclick="document.getElementById('id03').style.display='block'">Contato</a>
 					
-			<a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contato</a>
-					
-			<a href="#" onclick="document.getElementById('id03').style.display='block'" 
+			<a href="#" onclick="document.getElementById('id04').style.display='block'" 
 				class="w3-padding-large w3-hover-red w3-hide-small w3-right"><i class="fa fa-search"></i></a>
 		</div>
 			
@@ -91,17 +92,43 @@
 					</label>
 					<div class="container_buttons">
 					<!--<a href="#" style="color:dodgerblue">Ler os Termos & Privacidade</a>.-->
-						<a href="#">Ler os Termos & Privacidade</a>.
-						<button type="button" onclick="document.getElementById('id02').style.display='none'"class="cancelbtn">Cancelar</button>
+						<button type="button" class="btn" style="margin: 15px; float: left; background-color:#222">Ler os Termos & Privacidade</a>.
 						<button type="submit" class="signupbtn" style="margin: 15px">Cadastrar</button>
+						<button type="button" onclick="document.getElementById('id02').style.display='none'"class="cancelbtn">Cancelar</button>
 					</div>
 				</div>
 			</form>
 		</div>
-				
+
+		<!-- The Contact Modal -->
+		<div id="id02" class="modal">
+			<span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<form action="acao.php" style="border:1px solid #ccc">
+				<div class="container cmodal">
+					<h1>Contato</h1>
+					<p>por favor, complete o formulario para se registrar</p>
+					<hr/>
+					<label for="name">Nome</label>
+					<input type="text" id="name" name="name" placeholder="Nome">
+
+					<label for="email">E-mail</label>
+					<input type="text" id="email" name="email" placeholder="E-mail">
+
+					<label for="subject">Assunto</label>
+					<input type="text" id="subject" name="subject" placeholder="Assunto">
+
+					<label for="message">Mensagem</label>
+					<textarea id="subject" name="message" placeholder="Digite sua mensagem.." style="height:200px"></textarea>
+					<div class="container_buttons">
+						<button type="submit" class="signupbtn" style="margin: 15px">Enviar</button>
+						<button type="button" onclick="document.getElementById('id03').style.display='none'"class="cancelbtn">Cancelar</button>
+					</div>
+				</div>
+			</form>
+		</div>		
 		<!--The Search Modal-->
 		<div id="id03" class="modal">
-			<span class="close" onclick="document.getElementById('id03').style.display='none'" title="Close Modal">&times;</span>
+			<span class="close" onclick="document.getElementById('id04').style.display='none'" title="Close Modal">&times;</span>
 			<form action="acao.php" style="border:1px solid #ccc">
 				<div class="container cmodal">
 					<h1>Pesquisar</h1>
@@ -233,6 +260,7 @@
 			<div class="w3-quarter">
 				<h2>Loja em Destaque</h2>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+				<button class="btnfeatureshop">Ver Loja</button>
 			</div>
 			<div class="w3-quarter">
 				<div class="w3-card w3-white">
