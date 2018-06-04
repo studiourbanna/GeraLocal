@@ -1,7 +1,7 @@
 //for modals
 
 // Get the modal
-var modal = document.getElementById('id01');
+var modal = document.getElementById('id');
 
 // When the user clicks anywhere outside of the modal, close it
 window.onclick = function(event) {
