@@ -195,7 +195,7 @@ img.avatar {
 /* Add padding to containers */
 .container {
     /* padding: 16px; */
-    color: #feffee;
+    /* color: #feffee; */
 }
 
 /* The "Forgot password" text */
@@ -344,7 +344,6 @@ form.example::after {
   clear: both;
   display: table;
 }
-
 
 * {
   box-sizing: border-box;
