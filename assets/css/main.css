@@ -388,6 +388,7 @@ span.psw {
     height: 30px;
     width: 30px;
     background-color: #eee;
+    margin-left: -35px;
 }
 
 /* On mouse-over, add a grey background color */

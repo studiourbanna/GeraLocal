@@ -60,14 +60,15 @@
 					
 					<label for="psw"><b class="label">Senha</b></label>
 					<input type="password" placeholder="informe a senha" name="psw" required>
-				
-					<label class="container">Me lembre
-						<input type="checkbox" checked="checked" name="remember">
-						<span class="checkmark"></span>
-					</label>
+					<div class="container padding-16">
+						<label class="container">Me lembre
+							<input type="checkbox" checked="checked" name="remember">
+							<span class="checkmark"></span>
+						</label>
+					</div>
 				</div>
 				<div class="container_buttons">
-					<button type="button" class="btn" style="margin: 15px; float: left; background-color:#222">Esqueceu a senha?</button>
+					<button type="button" class="btn black" style="margin: 15px; float: left; background-color:#222">Esqueceu a senha?</button>
 					<button type="submit" class="signupbtn" style="margin: 15px">Entrar</button>
 					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
 				</div>
@@ -92,17 +93,23 @@
 					<input type="password" placeholder="informe sua senha" name="psw" required>
 					<label for="psw-repeat"><b class="label">Confirme sua Senha</b></label>
 					<input type="password" placeholder="repita sua senha" name="psw-repeat" required>
-					<label class="container">Me lembre
-						<input type="checkbox" checked="checked" name="remember">
-						<span class="checkmark"></span>
-					</label>
-					<label class="container">Concordo com os Termos
-						<input type="checkbox" checked="checked" name="remember">
-						<span class="checkmark"></span>
-					</label>
+					<div class="container padding-16">
+						<div class="column" style="margin-left:35%">
+							<label class="container">Me lembre
+								<input type="checkbox" checked="checked" name="remember">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="column">
+							<label class="container right">Concordo com os Termos
+								<input type="checkbox" name="remember">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
 					<div class="container_buttons">
 					<!--<a href="#" style="color:dodgerblue">Ler os Termos & Privacidade</a>.-->
-						<button type="button" class="btn" style="margin: 15px; float: left; background-color:#222">Ler os Termos & Privacidade</a>.
+						<button type="button" class="btn black" style="margin: 15px; float: left; background-color:#222">Ler os Termos & Privacidade</a>.
 						<button type="submit" class="signupbtn" style="margin: 15px">Cadastrar</button>
 						<button type="button" onclick="document.getElementById('id02').style.display='none'"class="cancelbtn">Cancelar</button>
 					</div>

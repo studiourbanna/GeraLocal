@@ -1,0 +1,160 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>Futuro GeraLocal</title>
+		<link rel="stylesheet" type="text/css" href="../assets/css/main.css">
+		<script src="../assets/js/slides.js"></script>
+	</head>
+	<body>
+		<div class="top">
+			<div class="bar black card">
+				<a class="bar-item button padding-large hide-medium hide-large right" 
+					href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+				<a href="index" class="bar-item button padding-large logo"><b>GeraLocal</b></a>
+				<div class="header-right">
+					<a href="#" class="bar-item button padding-large hide-small" 
+					onclick="document.getElementById('id01').style.display='block'">Entrar</a>
+						
+					<a href="#" class="bar-item button padding-large hide-small" 
+					onclick="document.getElementById('id02').style.display='block'">Cadastrar</a>
+					
+					<a href="#" class="bar-item button padding-large hide-small"
+					onclick="document.getElementById('id03').style.display='block'">Contato</a>
+						
+					<a href="#" class="bar-item button padding-large hide-small"
+					onclick="document.getElementById('id04').style.display='block'"><i class="fa fa-search"></i></a>
+				</div>
+			</div>
+		</div>
+
+		<!-- Navbar on small screens -->
+		<div id="navDemo" class="bar-block black hide hide-large hide-medium top" style="margin-top:46px">
+			<a class="bar-item button padding-large hide-medium hide-large right" 
+			href="javascript:void(0)" onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
+				
+			<a href="#" class="bar-item button padding-large hide-small" 
+			onclick="document.getElementById('id01').style.display='block'">Entrar</a>
+						
+			<a href="#" class="bar-item button padding-large hide-small" 
+			onclick="document.getElementById('id02').style.display='block'">Cadastrar</a>
+					
+			<a href="#" class="bar-item button padding-large hide-small"
+			onclick="document.getElementById('id03').style.display='block'">Contato</a>
+						
+			<a href="#" class="bar-item button padding-large hide-small"
+			onclick="document.getElementById('id04').style.display='block'"><i class="fa fa-search"></i></a>
+		</div>
+			
+		<!-- The Login Modal -->
+		<div id="id01" class="modal">
+			<span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<!-- Modal Content -->
+			<form action="login.php" style="border:1px solid #ccc">
+				<!--<div class="imgcontainer"><img src="media/images/avatar_milla.png" alt="Avatar" class="avatar" /></div>-->
+				<div class="container cmodal">
+					<h1>Login</h1>
+					<p>entre no sistema</p>
+					<hr/>
+					<label for="uname"><b class="label">Usuário</b></label>
+					<input type="text" placeholder="informe o usuário" name="uname" required>
+					
+					<label for="psw"><b class="label">Senha</b></label>
+					<input type="password" placeholder="informe a senha" name="psw" required>
+					<div class="container padding-16 cmodal">
+						<label class="container">Me lembre
+							<input type="checkbox" checked="checked" name="remember">
+							<span class="checkmark"></span>
+						</label>
+					</div>
+				</div>
+				<div class="container_buttons">
+					<button type="button" class="btn black" style="margin: 15px; float: left; background-color:#222">Esqueceu a senha?</button>
+					<button type="submit" class="signupbtn" style="margin: 15px">Entrar</button>
+					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
+				</div>
+			</form>
+		</div>
+					
+		<!-- The Signup Modal -->
+		<div id="id02" class="modal">
+			<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<form action="cadastro.php" style="border:1px solid #ccc">
+				<div class="container cmodal">
+					<h1>Cadastrar</h1>
+					<p>por favor, complete o formulario para se registrar</p>
+					<hr/>
+					<label for="name"><b class="label">Nome</b></label>
+					<input type="text" placeholder="informe seu nome" name="name" required>
+					<label for="cpf"><b class="label">CPF</b></label>
+					<input type="text" placeholder="informe seu CPF" name="cpf" required>
+					<label for="email"><b class="label">E-mail</b></label>
+					<input type="text" placeholder="informe seu e-mail" name="email" required>
+					<label for="psw"><b class="label">Senha</b></label>
+					<input type="password" placeholder="informe sua senha" name="psw" required>
+					<label for="psw-repeat"><b class="label">Confirme sua Senha</b></label>
+					<input type="password" placeholder="repita sua senha" name="psw-repeat" required>
+					<div class="container padding-16">
+						<div class="column" style="margin-left:35%">
+							<label class="container">Me lembre
+								<input type="checkbox" checked="checked" name="remember">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+						<div class="column">
+							<label class="container right">Concordo com os Termos
+								<input type="checkbox" name="remember">
+								<span class="checkmark"></span>
+							</label>
+						</div>
+					</div>
+					<div class="container_buttons">
+					<!--<a href="#" style="color:dodgerblue">Ler os Termos & Privacidade</a>.-->
+						<button type="button" class="btn black" style="margin: 15px; float: left; background-color:#222">Ler os Termos & Privacidade</a>.
+						<button type="submit" class="signupbtn" style="margin: 15px">Cadastrar</button>
+						<button type="button" onclick="document.getElementById('id02').style.display='none'"class="cancelbtn">Cancelar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+
+		<!-- The Contact Modal -->
+		<div id="id03" class="modal">
+			<span onclick="document.getElementById('id03').style.display='none'" class="close" title="Close Modal">&times;</span>
+			<form action="contact.php" style="border:1px solid #ccc">
+				<div class="container cmodal">
+					<h1>Contato</h1>
+					<p>por favor, complete o formulario para se registrar</p>
+					<hr/>
+					<label for="name"><b class="label">Nome</b></label>
+					<input type="text" id="name" name="name" placeholder="Nome">
+
+					<label for="email"><b class="label">E-mail</b></label>
+					<input type="text" id="email" name="email" placeholder="E-mail">
+
+					<label for="subject"><b class="label">Assunto</b></label>
+					<input type="text" id="subject" name="subject" placeholder="Assunto">
+
+					<label for="message"><b class="label">Mensagem</b></label>
+					<input type="textarea" id="message" name="message" placeholder="Digite sua mensagem...">
+					<div class="container_buttons">
+						<button type="submit" class="signupbtn" style="margin: 15px">Enviar</button>
+						<button type="button" onclick="document.getElementById('id03').style.display='none'"class="cancelbtn">Cancelar</button>
+					</div>
+				</div>
+			</form>
+		</div>
+		
+		<!--The Search Modal-->
+		<div id="id04" class="modal">
+			<span class="close" onclick="document.getElementById('id04').style.display='none'" title="Close Modal">&times;</span>
+			<form action="search.php" style="border:1px solid #ccc">
+				<div class="container cmodal">
+					<h1>Pesquisar</h1>
+					<p>digite e clique no botão para pesquisar</p>
+					<hr/>
+					<input type="text" placeholder="Pesquisar..." name="search">
+					<button type="submit" class="button_search"><i class="fa fa-search"></i></button>
+				</div>
+			</form>
+		</div>
+		
