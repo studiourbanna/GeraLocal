@@ -58,7 +58,7 @@ body {
   text-align: center;
 }
 
-
+/*HEADER*/
 
 .header {
   overflow: hidden;
@@ -107,6 +107,7 @@ body {
   }
 }
 
+/* NAVBAR */
 .navbar {
 	width: 100%;
 }
@@ -133,87 +134,17 @@ body {
     color: black;
 }
 
-/* Bordered form */
-form {
-    border: 3px solid #f1f1f1;
-}
-
-/* Full-width inputs */
-input[type=text], input[type=password], input[type=textarea] {
-    width: 80%;
-    padding: 12px 20px;
-    margin: 8px 0;
-    display: inline-block;
-    border: 1px solid #ccc;
-    box-sizing: border-box;
-}
-
-input[type=textarea]{
-	padding: 0;
-	height: 200px;
-	display: inline;
-}
-
-/* Set a style for all buttons */
-button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 14px 20px;
-    /* margin: 15; */
-    border: none;
-    cursor: pointer;
-    width: 20%;
-    float: right;
-}
-
-/* Add a hover effect for buttons */
-button:hover {
-    opacity: 0.8;
-}
-
-/* Extra style for the cancel button (red) */
-.cancelbtn {
-    width: 20%;
-    padding: 14px 18px;
-    background-color: #f44336;
-    margin: 15;
-}
-
-/* Center the avatar image inside this container */
-.imgcontainer {
-    text-align: center;
-    margin: 24px 0 12px 0;
-}
-
-/* Avatar image */
-img.avatar {
-    width: 350px;
-	height: 350px;
-    border-radius: 50%;
-}
+/*PAGE CONTAINER*/
 
 /* Add padding to containers */
 .container {
     /* padding: 16px; */
     /* color: #feffee; */
+	/* Position the image container (needed to position the left and right arrows) */
+	position: relative;
 }
 
-/* The "Forgot password" text */
-span.psw {
-    float: left;
-    padding-top: 16px;
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-    span.psw {
-        display: block;
-        float: none;
-    }
-    .cancelbtn {
-        width: 100%;
-    }
-}
+/*MODAL FORM*/
 
 /* The Modal (background) */
 .modal {
@@ -345,96 +276,80 @@ form.example::after {
   display: table;
 }
 
-* {
-  box-sizing: border-box;
+/* Bordered form */
+form {
+    border: 3px solid #f1f1f1;
 }
 
-/* Position the image container (needed to position the left and right arrows) */
-.container {
-  position: relative;
+/* Full-width inputs */
+input[type=text], input[type=password], input[type=textarea] {
+    width: 80%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
 }
 
-/* Hide the images by default */
-.mySlides {
-  display: none;
+input[type=textarea]{
+	padding: 0;
+	height: 200px;
+	display: inline;
 }
 
-/* Add a pointer when hovering over the thumbnail images */
-.cursor {
-  cursor: pointer;
+/* Set a style for all buttons */
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px 20px;
+    /* margin: 15; */
+    border: none;
+    cursor: pointer;
+    width: 20%;
+    float: right;
 }
 
-/* Next & previous buttons */
-.prev,
-.next {
-  cursor: pointer;
-  position: absolute;
-  top: 40%;
-  width: auto;
-  padding: 16px;
-  margin-top: -50px;
-  color: white;
-  font-weight: bold;
-  font-size: 20px;
-  border-radius: 0 3px 3px 0;
-  user-select: none;
-  -webkit-user-select: none;
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
 }
 
-/* Position the "next button" to the right */
-.next {
-  right: 0;
-  border-radius: 3px 0 0 3px;
+/* Extra style for the cancel button (red) */
+.cancelbtn {
+    width: 20%;
+    padding: 14px 18px;
+    background-color: #f44336;
+    margin: 15;
 }
 
-/* On hover, add a black background color with a little bit see-through */
-.prev:hover,
-.next:hover {
-  background-color: rgba(0, 0, 0, 0.8);
+/* Center the avatar image inside this container */
+.imgcontainer {
+    text-align: center;
+    margin: 24px 0 12px 0;
 }
 
-/* Number text (1/3 etc) */
-.numbertext {
-  color: #f2f2f2;
-  font-size: 12px;
-  padding: 8px 12px;
-  position: absolute;
-  top: 0;
+/* Avatar image */
+img.avatar {
+    width: 350px;
+	height: 350px;
+    border-radius: 50%;
 }
 
-/* Container for image text */
-.caption-container {
-  text-align: center;
-  background-color: #222;
-  padding: 2px 16px;
-  color: white;
-}
-
-.row:after {
-  content: "";
-  display: table;
-  clear: both;
-}
-
-/* Six columns side by side */
-.column {
-  float: left;
-  width: 16.66%;
-}
-
-/* Add a transparency effect for thumnbail images */
-.demo {
-  opacity: 0.6;
-}
-
-.active,
-.demo:hover {
-  opacity: 1;
-}
-
-.label{    
-	width: 20%;
+/* The "Forgot password" text */
+span.psw {
     float: left;
+    padding-top: 16px;
+}
+
+/* Change styles for span and cancel button on extra small screens */
+@media screen and (max-width: 300px) {
+    span.psw {
+        display: block;
+        float: none;
+    }
+    .cancelbtn {
+        width: 100%;
+    }
 }
 
 .pswlink a {
@@ -453,56 +368,6 @@ form.example::after {
 
 .button_search{
 	margin-top: 7.5px;
-}
-
-.parallax {
-    /* Full height */
-    /* height: 45%; */
-
-    /* Create the parallax scrolling effect */
-    background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
-.text-block {
-    position: absolute;
-    top: 45%;
-    bottom: 15%;
-    right: 0px;
-    background-color: #00000085;
-    color: white;
-    padding-left: 10%;
-    padding-right: 30%;
-    float: left;
-}
-
-.cmodal{
-	padding: 26px;
-	color: #feffee;
-}
-
-.btnstore, .btnfeatureshop{
-	background-color: #000000;
-	padding: 10;
-}
-
-.btnstore{
-	width: 90%;
-}
-
-.btnfeatureshop{
-	margin-bottom: 10px;
-	margin-top: 10px;
-	width: 100%;
-}
-
-.btnslide{
-	float: left;
-    width: auto;
-    padding: 15px;
-    background-color: #bbbbbb;
 }
 
 /* Hide the browser's default checkbox */
@@ -560,3 +425,142 @@ form.example::after {
     -ms-transform: rotate(45deg);
     transform: rotate(45deg);
 }
+
+/*SLIDES*/
+
+* {
+  box-sizing: border-box;
+}
+
+.parallax {
+    /* Full height */
+    /* height: 45%; */
+    /* Create the parallax scrolling effect */
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+/* Hide the images by default */
+.mySlides {
+  display: none;
+}
+
+/* Add a pointer when hovering over the thumbnail images */
+.cursor {
+  cursor: pointer;
+}
+
+/* Next & previous buttons */
+.prev, .next {
+  cursor: pointer;
+  position: absolute;
+  top: 40%;
+  width: auto;
+  padding: 16px;
+  margin-top: -50px;
+  color: white;
+  font-weight: bold;
+  font-size: 20px;
+  border-radius: 0 3px 3px 0;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+/* Position the "next button" to the right */
+.next {
+  right: 0;
+  border-radius: 3px 0 0 3px;
+}
+
+/* On hover, add a black background color with a little bit see-through */
+.prev:hover, .next:hover {
+  background-color: rgba(0, 0, 0, 0.8);
+}
+
+/* Number text (1/3 etc) */
+.numbertext {
+  color: #f2f2f2;
+  font-size: 12px;
+  padding: 8px 12px;
+  position: absolute;
+  top: 0;
+}
+
+/* Container for image text */
+.caption-container {
+  text-align: center;
+  background-color: #222;
+  padding: 2px 16px;
+  color: white;
+}
+
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/*STORE - COLUMNS*/
+
+/* Six columns side by side */
+.column {
+  float: left;
+  width: 16.66%;
+}
+
+/* Add a transparency effect for thumnbail images */
+.demo {
+  opacity: 0.6;
+}
+
+.active, .demo:hover {
+  opacity: 1;
+}
+
+.label{    
+	width: 20%;
+    float: left;
+}
+
+.text-block {
+    position: absolute;
+    top: 45%;
+    bottom: 15%;
+    right: 0px;
+    background-color: #00000085;
+    color: white;
+    padding-left: 10%;
+    padding-right: 30%;
+    float: left;
+}
+
+.cmodal{
+	padding: 26px;
+	color: #feffee;
+}
+
+.btnstore, .btnfeatureshop{
+	background-color: #000000;
+	padding: 10;
+}
+
+.btnstore{
+	width: 90%;
+}
+
+.btnfeatureshop{
+	margin-bottom: 10px;
+	margin-top: 10px;
+	width: 100%;
+}
+
+.btnslide{
+	float: left;
+    width: auto;
+    padding: 15px;
+    background-color: #bbbbbb;
+}
+
+

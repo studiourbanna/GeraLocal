@@ -77,15 +77,17 @@
 		<!-- The Signup Modal -->
 		<div id="id02" class="modal">
 			<span onclick="document.getElementById('id02').style.display='none'" class="close" title="Close Modal">&times;</span>
-			<form action="login.php" style="border:1px solid #ccc">
+			<form action="cadastro.php" style="border:1px solid #ccc">
 				<div class="container cmodal">
 					<h1>Cadastrar</h1>
 					<p>por favor, complete o formulario para se registrar</p>
 					<hr/>
-						
+					<label for="name"><b class="label">Nome</b></label>
+					<input type="text" placeholder="informe seu nome" name="name" required>
+					<label for="cpf"><b class="label">CPF</b></label>
+					<input type="text" placeholder="informe seu CPF" name="cpf" required>
 					<label for="email"><b class="label">E-mail</b></label>
 					<input type="text" placeholder="informe seu e-mail" name="email" required>
-						
 					<label for="psw"><b class="label">Senha</b></label>
 					<input type="password" placeholder="informe sua senha" name="psw" required>
 					<label for="psw-repeat"><b class="label">Confirme sua Senha</b></label>
@@ -467,14 +469,18 @@
 			</div>
 		</div>
 		<footer class="container padding-64 center opacity light-grey xlarge">
-			<i class="fab fa-facebook-f hover-opacity"></i>
-			<i class="fab fa-instagram hover-opacity"></i>
-			<i class="fab fa-snapchat-ghost hover-opacity"></i>
-			<i class="fab fa-pinterest-p hover-opacity"></i>
-			<i class="fab fa-twitter hover-opacity"></i>
-			<i class="fab fa-linkedin-in hover-opacity"></i>
-			<p class="medium">Feito por <a href="http://clcmo.github.io">CLCMO</a> | 
-			Com <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+			<div class="column" style="margin-left:35%">
+				<i class="fab fa-facebook-f hover-opacity"></i>
+				<i class="fab fa-instagram hover-opacity"></i>
+				<i class="fab fa-snapchat-ghost hover-opacity"></i>
+				<i class="fab fa-pinterest-p hover-opacity"></i>
+				<i class="fab fa-twitter hover-opacity"></i>
+				<i class="fab fa-linkedin-in hover-opacity"></i>
+			</div>
+			<div class="column">
+				<p class="medium">Feito por <a href="http://clcmo.github.io">CLCMO</a> | 
+				Com <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
+			</div>
 		</footer>
 		<script>
 			var slideIndex = 1;
