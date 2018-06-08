@@ -572,4 +572,7 @@ span.psw {
     width: 25%;
 }
 
-
+.form{
+	border:1px solid #ccc;
+	width: 99.5%;
+}
