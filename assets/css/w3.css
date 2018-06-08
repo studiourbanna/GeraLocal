@@ -52,7 +52,7 @@ hr{border:0;border-top:1px solid #eee;margin:20px 0}
 .dropdown-hover:first-child,.dropdown-click:hover{background-color:#ccc;color:#000}
 .dropdown-hover:hover > .button:first-child,.dropdown-click:hover > .button:first-child{background-color:#ccc;color:#000}
 .dropdown-content{cursor:auto;color:#000;background-color:#fff;display:none;position:absolute;min-width:160px;margin:0;padding:0;z-index:1}
-.check,.radio{width:24px;height:24px;position:relative;top:6px}
+.check,.radio{width:24px;height:24px;position:relative;top:6px;margin: 2%;}
 .sidebar{height:100%;width:200px;background-color:#fff;position:fixed!important;z-index:1;overflow:auto}
 .bar-block .dropdown-hover,.bar-block .dropdown-click{width:100%}
 .bar-block .dropdown-hover .dropdown-content,.bar-block .dropdown-click .dropdown-content{min-width:100%}

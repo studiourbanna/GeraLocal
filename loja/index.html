@@ -60,15 +60,17 @@
 					
 					<label for="psw"><b class="label">Senha</b></label>
 					<input type="password" placeholder="informe a senha" name="psw" required>
-					<div class="container padding-16 cmodal">
-						<label class="container">Me lembre
-							<input type="checkbox" checked="checked" name="remember">
-							<span class="checkmark"></span>
-						</label>
+					<div class="container padding-16">
+						<div class="column check">
+							<label class="container left">Me lembre
+								<input type="checkbox" checked="checked" name="remember">
+								<span class="checkmark"></span>
+							</label>
+						</div>
 					</div>
 				</div>
 				<div class="container_buttons">
-					<button type="button" class="btn black" style="margin: 15px; float: left; background-color:#222">Esqueceu a senha?</button>
+					<button type="button" class="blackbtn" style="margin: 15px; float: left; background-color:#222">Esqueceu a senha?</button>
 					<button type="submit" class="signupbtn" style="margin: 15px">Entrar</button>
 					<button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancelar</button>
 				</div>
@@ -94,13 +96,13 @@
 					<label for="psw-repeat"><b class="label">Confirme sua Senha</b></label>
 					<input type="password" placeholder="repita sua senha" name="psw-repeat" required>
 					<div class="container padding-16">
-						<div class="column" style="margin-left:35%">
-							<label class="container">Me lembre
+						<div class="column check">
+							<label class="container left">Me lembre
 								<input type="checkbox" checked="checked" name="remember">
 								<span class="checkmark"></span>
 							</label>
 						</div>
-						<div class="column">
+						<div class="column check">
 							<label class="container right">Concordo com os Termos
 								<input type="checkbox" name="remember">
 								<span class="checkmark"></span>
@@ -109,7 +111,7 @@
 					</div>
 					<div class="container_buttons">
 					<!--<a href="#" style="color:dodgerblue">Ler os Termos & Privacidade</a>.-->
-						<button type="button" class="btn black" style="margin: 15px; float: left; background-color:#222">Ler os Termos & Privacidade</a>.
+						<button type="button" class="blackbtn" style="margin: 15px; float: left; background-color:#222">Ler os Termos & Privacidade</a>.
 						<button type="submit" class="signupbtn" style="margin: 15px">Cadastrar</button>
 						<button type="button" onclick="document.getElementById('id02').style.display='none'"class="cancelbtn">Cancelar</button>
 					</div>
