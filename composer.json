@@ -1,0 +1,7 @@
+{
+    "require": {
+        "geralocal/package": "1.1.3",
+        "geralocal/package2": "1.*",
+        "geralocal/package3": "^2.0.3"
+    }
+}
