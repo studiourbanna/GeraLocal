@@ -4,8 +4,7 @@
     "keywords": ["geralocal", "geralab"],
     "license": "MIT",
     "type": "project",
-    {
     "require": {
         "php": "5.7.*",
-    }
+    },
 }
