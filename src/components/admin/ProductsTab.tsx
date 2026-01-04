@@ -38,6 +38,9 @@ const ProductsTab: React.FC = () => {
     setForm(product);
   };
 
+  // Garantir que products seja sempre um array
+  const safeProducts: Product[] = Array.isArray(products) ? products : [];
+
   return (
     <div>
       <h3 className="text-xl mb-4">Gerenciar Produtos</h3>
@@ -116,21 +119,29 @@ const ProductsTab: React.FC = () => {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
-            <tr key={product.id} className="border-t">
-              <td className="p-2">{product.name}</td>
-              <td className="p-2">R$ {product.price}</td>
-              <td className="p-2">{product.stock}</td>
-              <td className="p-2">
-                <button onClick={() => handleEdit(product)} className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
-                  Editar
-                </button>
-                <button onClick={() => deleteProduct(product.id)} className="bg-red-500 text-white px-2 py-1 rounded">
-                  Deletar
-                </button>
+          {safeProducts.length === 0 ? (
+            <tr>
+              <td colSpan={4} className="p-2 text-center text-gray-500">
+                Nenhum produto encontrado.
               </td>
             </tr>
-          ))}
+          ) : (
+            safeProducts.map((product) => (
+              <tr key={product.id} className="border-t">
+                <td className="p-2">{product.name}</td>
+                <td className="p-2">R$ {product.price}</td>
+                <td className="p-2">{product.stock}</td>
+                <td className="p-2">
+                  <button onClick={() => handleEdit(product)} className="bg-blue-500 text-white px-2 py-1 rounded mr-2">
+                    Editar
+                  </button>
+                  <button onClick={() => deleteProduct(product.id)} className="bg-red-500 text-white px-2 py-1 rounded">
+                    Deletar
+                  </button>
+                </td>
+              </tr>
+            ))
+          )}
         </tbody>
       </table>
     </div>

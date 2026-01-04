@@ -8,8 +8,10 @@ export class AuthViewModel {
     this.user = authService.getCurrentUser();
   }
 
-  login(email: string, password: string): boolean {
-    this.user = authService.login(email, password);
+  // login agora é assíncrono para refletir o authService
+  async login(email: string, password: string): Promise<boolean> {
+    const loggedUser = await authService.login(email, password);
+    this.user = loggedUser;
     return this.user !== null;
   }
 
@@ -22,7 +24,8 @@ export class AuthViewModel {
     return this.user !== null;
   }
 
-  get currentUser(): User | null {
+  // método explícito para alinhar com AuthContextType
+  getCurrentUser(): User | null {
     return this.user;
   }
 }

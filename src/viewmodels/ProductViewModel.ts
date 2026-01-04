@@ -5,11 +5,14 @@ export class ProductViewModel {
   private products: Product[] = [];
 
   constructor() {
-    this.products = storageService.getProducts();
+    const data = storageService.getProducts();
+    // garante que products seja sempre array
+    this.products = Array.isArray(data) ? data : [];
   }
 
   getProducts(): Product[] {
-    return this.products;
+    // reforço: sempre retorna array
+    return Array.isArray(this.products) ? this.products : [];
   }
 
   addProduct(product: Omit<Product, 'id'>) {
@@ -32,6 +35,7 @@ export class ProductViewModel {
   }
 
   private save() {
-    storageService.saveProducts(this.products);
+    // garante que salva sempre array
+    storageService.saveProducts(Array.isArray(this.products) ? this.products : []);
   }
 }

@@ -5,8 +5,8 @@ const SettingsTab: React.FC = () => {
   const { config, updateConfig } = useTheme();
 
   return (
-    <div>
-      <h3 className="text-xl mb-4">Configurações da Loja</h3>
+    <div className="bg-white dark:bg-gray-800 p-6 rounded shadow text-black dark:text-white">
+      <h3 className="text-xl mb-4">⚙️ Configurações da Loja</h3>
       <div className="space-y-4">
         <div>
           <label className="block mb-2">Nome da Loja</label>
@@ -14,26 +14,44 @@ const SettingsTab: React.FC = () => {
             type="text"
             value={config.name}
             onChange={(e) => updateConfig({ name: e.target.value })}
-            className="p-2 border rounded w-full"
+            className="p-2 border rounded w-full 
+                       bg-white text-black 
+                       dark:bg-gray-700 dark:text-white 
+                       dark:placeholder-gray-400"
+            placeholder="Digite o nome da loja"
           />
         </div>
         <div>
           <label className="block mb-2">Tema</label>
           <select
             value={config.theme}
-            onChange={(e) => updateConfig({ theme: e.target.value as 'light' | 'dark' })}
-            className="p-2 border rounded"
+            onChange={(e) =>
+              updateConfig({ theme: e.target.value as 'light' | 'dark' })
+            }
+            className="p-2 border rounded w-full 
+                       bg-white text-black 
+                       dark:bg-gray-700 dark:text-white"
           >
-            <option value="light">Claro</option>
-            <option value="dark">Escuro</option>
+            <option value="light">Claro 🌞</option>
+            <option value="dark">Escuro 🌙</option>
           </select>
         </div>
         <div>
           <label className="block mb-2">Acessibilidade</label>
           <select
             value={config.accessibility}
-            onChange={(e) => updateConfig({ accessibility: e.target.value as 'normal' | 'protanopia' | 'deuteranopia' | 'tritanopia' })}
-            className="p-2 border rounded"
+            onChange={(e) =>
+              updateConfig({
+                accessibility: e.target.value as
+                  | 'normal'
+                  | 'protanopia'
+                  | 'deuteranopia'
+                  | 'tritanopia',
+              })
+            }
+            className="p-2 border rounded w-full 
+                       bg-white text-black 
+                       dark:bg-gray-700 dark:text-white"
           >
             <option value="normal">Normal</option>
             <option value="protanopia">Protanopia</option>

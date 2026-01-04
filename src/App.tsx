@@ -1,37 +1,35 @@
 import React from 'react';
-import { useAuth } from './contexts/AuthContext';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import Header from './components/shared/Header';
 import { ThemeProvider } from './contexts/ThemeContext';
 import { AuthProvider } from './contexts/AuthContext';
 import { StoreProvider } from './contexts/StoreContext';
-import Header from './components/shared/Header';
-import Footer from './components/shared/Footer';
-import Dashboard from './components/admin/Dashboard';
+
+// Importar páginas
 import LandingPage from './components/public/LandingPage';
+import LoginPage from './components/auth/LoginPage';
+import PasswordlessLogin from './components/auth/PasswordlessLogin';
+import Dashboard from './components/admin/Dashboard'; // ✅ importe o Dashboard
 
-const App: React.FC = () => {
-  const { viewModel } = useAuth();
-
-  return (
-    <div className="min-h-screen flex flex-col">
-      <Header />
-      <main className="flex-grow">
-        {viewModel.isLoggedIn ? <Dashboard /> : <LandingPage />}
-      </main>
-      <Footer />
-    </div>
-  );
-};
-
-const Root = () => {
+function App() {
   return (
     <ThemeProvider>
       <AuthProvider>
         <StoreProvider>
-          <App />
+          <BrowserRouter>
+            <Header />
+            <Routes>
+              <Route path="/" element={<LandingPage />} />
+              <Route path="/login" element={<LoginPage />} />
+              <Route path="/passwordless" element={<PasswordlessLogin />} />
+              {/* ✅ rota para o Dashboard */}
+              <Route path="/dashboard" element={<Dashboard />} />
+            </Routes>
+          </BrowserRouter>
         </StoreProvider>
       </AuthProvider>
     </ThemeProvider>
   );
-};
+}
 
-export default Root;
+export default App;

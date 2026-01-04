@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 import { Product } from '../models/Product';
 import { ProductViewModel } from '../viewmodels/ProductViewModel';
 
@@ -14,21 +14,32 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [viewModel] = useState(() => new ProductViewModel());
-  const [products, setProducts] = useState(viewModel.getProducts());
+
+  // inicializa sempre como array vazio
+  const [products, setProducts] = useState<Product[]>([]);
+
+  // carrega produtos do viewModel na montagem
+  useEffect(() => {
+    const data = viewModel.getProducts();
+    setProducts(Array.isArray(data) ? data : []);
+  }, [viewModel]);
 
   const addProduct = (product: Omit<Product, 'id'>) => {
     viewModel.addProduct(product);
-    setProducts(viewModel.getProducts());
+    const data = viewModel.getProducts();
+    setProducts(Array.isArray(data) ? data : []);
   };
 
   const updateProduct = (id: string, updates: Partial<Product>) => {
     viewModel.updateProduct(id, updates);
-    setProducts([...viewModel.getProducts()]);
+    const data = viewModel.getProducts();
+    setProducts(Array.isArray(data) ? [...data] : []);
   };
 
   const deleteProduct = (id: string) => {
     viewModel.deleteProduct(id);
-    setProducts(viewModel.getProducts());
+    const data = viewModel.getProducts();
+    setProducts(Array.isArray(data) ? data : []);
   };
 
   return (
