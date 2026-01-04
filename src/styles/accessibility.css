@@ -1,0 +1,30 @@
+/* Protanopia */
+.protanopia {
+  filter: grayscale(50%) sepia(50%);
+}
+
+/* Deuteranopia */
+.deuteranopia {
+  filter: hue-rotate(180deg);
+}
+
+/* Tritanopia */
+.tritanopia {
+  filter: invert(100%) hue-rotate(180deg);
+}
+
+/* Focus styles for accessibility */
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast */
+@media (prefers-contrast: high) {
+  body {
+    filter: contrast(1.5);
+  }
+}
