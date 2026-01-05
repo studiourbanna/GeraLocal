@@ -19,7 +19,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
     price: 0,
     stock: 0,
     image: '',
-    category: ''
+    categoryId: ''
   };
 
   const [form, setForm] = useState<Omit<Product, 'id'>>(initialForm);
@@ -52,7 +52,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
       price: product.price,
       stock: product.stock,
       image: product.image || '',
-      category: product.category
+      categoryId: product.categoryId
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
@@ -74,8 +74,8 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
           />
           <input
             type="text" placeholder="Categoria"
-            value={form.category}
-            onChange={(e) => setForm({ ...form, category: e.target.value })}
+            value={form.categoryId}
+            onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
             className="p-2 border rounded dark:bg-gray-800"
           />
           <input
@@ -145,7 +145,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
               ) : (
                 products.map((p) => (
                   <tr key={p.id} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900/50">
-                    <td className="p-3 font-medium">{p.name} <span className="text-xs text-gray-400 block">{p.category}</span></td>
+                    <td className="p-3 font-medium">{p.name} <span className="text-xs text-gray-400 block">{p.categoryId}</span></td>
                     <td className="p-3 text-right text-green-600 font-semibold">R$ {p.price.toFixed(2)}</td>
                     <td className="p-3 text-right">{p.stock} un</td>
                     <td className="p-3 text-center flex justify-center gap-2">

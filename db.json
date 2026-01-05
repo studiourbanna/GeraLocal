@@ -60,8 +60,7 @@
       "role": "user",
       "name": "Cliente Exemplo",
       "favorites": [
-        "2",
-        "3"
+        "1"
       ],
       "cart": []
     },

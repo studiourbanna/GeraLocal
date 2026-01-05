@@ -9,6 +9,7 @@ interface AuthContextType {
   logout: () => void;
   getCurrentUser: () => User | null;
   isAuthenticated: boolean;
+  toggleFavorite: (productId: string) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -16,6 +17,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   // Instância do AuthViewModel
   const [viewModel] = useState(() => new AuthViewModel());
+  const [user, setUser] = useState<User | null>(viewModel.getCurrentUser());
   
   // Estado para rastrear autenticação
   const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
@@ -40,6 +42,11 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
     return viewModel.getCurrentUser();
   }, [viewModel]);
 
+  const toggleFavorite = async (productId: string) => {
+    await viewModel.toggleFavorite(productId); // Chama a lógica na ViewModel
+    setUser({ ...viewModel.getCurrentUser()! }); // Atualiza o estado para o React renderizar a mudança
+  };
+
   return (
     <AuthContext.Provider 
       value={{ 
@@ -48,7 +55,8 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
         login, 
         logout, 
         getCurrentUser,
-        isAuthenticated 
+        isAuthenticated,
+        toggleFavorite
       }}
     >
       {children}

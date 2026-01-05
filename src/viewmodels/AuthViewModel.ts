@@ -10,7 +10,7 @@ export class AuthViewModel {
   }
 
   // Login retorna boolean para indicar sucesso/falha
-  async login(email: string, password: string): Promise<boolean> { 
+  async login(email: string, password: string): Promise<boolean> {
     try {
       const loggedUser = await authService.login(email, password);
       this.user = loggedUser;
@@ -45,19 +45,28 @@ export class AuthViewModel {
     return this.user?.name ?? null;
   }
 
-    async toggleFavorite(productId: string): Promise<void> {
+  async toggleFavorite(productId: string): Promise<void> {
     if (!this.user) return;
 
-    const favorites = this.user.favorites || [];
-    const index = favorites.indexOf(productId);
-    
-    if (index > -1) {
-      favorites.splice(index, 1); // Remove
+    // Inicializa favoritos como array caso não exista
+    const currentFavorites = this.user.favorites || [];
+    const isFavorite = currentFavorites.includes(productId);
+
+    let updatedFavorites;
+    if (isFavorite) {
+      // Se já é favorito, remove
+      updatedFavorites = currentFavorites.filter(id => id !== productId);
     } else {
-      favorites.push(productId); // Adiciona
+      // Se não é, adiciona
+      updatedFavorites = [...currentFavorites, productId];
     }
 
-    const updatedUser = await api.put(`users/${this.user.id}`, { ...this.user, favorites });
+    // Atualiza o usuário no db.json via API
+    const updatedUser = await api.put(`users/${this.user.id}`, {
+      ...this.user,
+      favorites: updatedFavorites
+    });
+
     this.user = updatedUser;
   }
 
