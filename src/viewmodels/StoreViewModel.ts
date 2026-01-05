@@ -1,19 +1,27 @@
 import { StoreConfig } from '../models/StoreConfig';
-import { storageService } from '../services/storage';
+import { api } from '../services/api';
 
 export class StoreViewModel {
-  private config: StoreConfig;
+  private config: StoreConfig | null = null;
 
-  constructor() {
-    this.config = storageService.getStoreConfig();
+  // Busca a configuração da loja na API
+  async getConfig(): Promise<StoreConfig> {
+    const response = await api.get('/storeConfig');
+    const data: StoreConfig = response.data;
+    this.config = data;
+    return data;
   }
 
-  getConfig(): StoreConfig {
+  // Atualiza a configuração da loja
+  async updateConfig(newConfig: StoreConfig): Promise<StoreConfig> {
+    const response = await api.put('/storeConfig', newConfig);
+    const data: StoreConfig = response.data;
+    this.config = data;
+    return data;
+  }
+
+  // Retorna a configuração atual em memória
+  getCurrentConfig(): StoreConfig | null {
     return this.config;
-  }
-
-  updateConfig(updates: Partial<StoreConfig>) {
-    this.config = { ...this.config, ...updates };
-    storageService.saveStoreConfig(this.config);
   }
 }
