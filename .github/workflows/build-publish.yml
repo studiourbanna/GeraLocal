@@ -30,7 +30,7 @@ jobs:
         run: npm run build
 
       - name: Verificar conteúdo da build
-        run: ls -la build  # Verifica o conteúdo da pasta 'build'
+        run: ls -la dist  # ✅ Vite gera 'dist'
 
       - name: Configurar GitHub Pages
         uses: actions/configure-pages@v3
@@ -38,7 +38,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-            path: ./build  # Estava 'dist', mudei para 'build'
+          path: ./dist  # ✅ usar 'dist'
 
   deploy:
     runs-on: ubuntu-latest
