@@ -5,19 +5,32 @@ import { useTheme } from '../../contexts/ThemeContext';
 const ThemeToggle: React.FC = () => {
   const { config, updateConfig } = useTheme();
 
-  const toggleTheme = () => {
+  const toggleTheme = async () => {
     if (!config) return; // evita erro se ainda não carregou
-    updateConfig({ theme: config.theme === 'light' ? 'dark' : 'light' });
+    const newTheme = config.theme === 'light' ? 'dark' : 'light';
+    await updateConfig({ theme: newTheme });
   };
+
+  if (!config) {
+    // Enquanto não carregou, mostra um botão desabilitado
+    return (
+      <button
+        className="p-2 rounded-full bg-gray-200 dark:bg-gray-700 opacity-50 cursor-not-allowed"
+        aria-label="Alternar tema"
+        disabled
+      >
+        <Moon size={20} />
+      </button>
+    );
+  }
 
   return (
     <button
       onClick={toggleTheme}
       className="p-2 rounded-full bg-gray-200 dark:bg-gray-700"
       aria-label="Alternar tema"
-      disabled={!config} // desabilita enquanto não há config
     >
-      {config?.theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+      {config.theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
     </button>
   );
 };

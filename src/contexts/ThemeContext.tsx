@@ -16,17 +16,47 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   // Carrega configuração inicial da loja
   useEffect(() => {
     (async () => {
-      const initialConfig = await viewModel.getConfig();
-      setConfig(initialConfig);
-      document.documentElement.className = initialConfig.theme;
+      try {
+        const initialConfig = await viewModel.getConfig();
+        setConfig(initialConfig);
+
+        if (initialConfig?.theme === 'dark') {
+          document.documentElement.classList.add('dark');
+        } else {
+          document.documentElement.classList.remove('dark');
+        }
+      } catch (err) {
+        console.error('Erro ao carregar configuração inicial', err);
+      }
     })();
   }, [viewModel]);
 
   const updateConfig = async (updates: Partial<StoreConfig>) => {
-    const updatedConfig = await viewModel.updateConfig(updates);
-    setConfig(updatedConfig);
-    document.documentElement.className = updatedConfig.theme;
+    try {
+      const updatedConfig = await viewModel.updateConfig(updates);
+      const safeConfig = { ...updatedConfig, theme: updatedConfig?.theme ?? 'light' };
+      setConfig(safeConfig);
+
+      if (safeConfig.theme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    } catch (err) {
+      console.error('Erro ao atualizar configuração', err);
+
+      // fallback local: mesmo se a API falhar, atualiza o tema em memória
+      const fallbackTheme = updates.theme ?? 'light';
+      setConfig(prev => ({ ...(prev ?? {} as StoreConfig), ...updates, theme: fallbackTheme }));
+
+      if (fallbackTheme === 'dark') {
+        document.documentElement.classList.add('dark');
+      } else {
+        document.documentElement.classList.remove('dark');
+      }
+    }
   };
+
 
   return (
     <ThemeContext.Provider value={{ config, updateConfig }}>
