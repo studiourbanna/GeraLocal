@@ -1,460 +1,50 @@
 {
   "storeConfig": [
     {
-      "id": "1",
-      "name": "GeraLocal Store",
-      "themeColor": "#8B5CF6",
-      "currency": "BRL",
-      "logo": "/images/logo.png"
-    },
-    {
-      "id": "f235",
-      "theme": "light"
-    },
-    {
-      "id": "09c9",
-      "theme": "dark"
-    },
-    {
-      "id": "7870",
-      "theme": "light"
-    },
-    {
-      "id": "d8bf",
-      "theme": "dark"
-    },
-    {
-      "id": "8ed7",
-      "theme": "light"
-    },
-    {
-      "id": "19ec",
-      "theme": "dark"
-    },
-    {
-      "id": "0219",
-      "theme": "light"
-    },
-    {
-      "id": "2c55",
-      "theme": "dark"
-    },
-    {
-      "id": "c146",
-      "theme": "light"
-    },
-    {
-      "id": "a492",
-      "theme": "dark"
-    },
-    {
-      "id": "1169",
-      "theme": "light"
-    },
-    {
-      "id": "fd62",
-      "theme": "dark"
-    },
-    {
-      "id": "9a74",
-      "theme": "light"
-    },
-    {
-      "id": "390c",
-      "theme": "dark"
-    },
-    {
-      "id": "4333",
-      "theme": "light"
-    },
-    {
-      "id": "c73e",
-      "theme": "dark"
-    },
-    {
-      "id": "5fda",
-      "theme": "light"
-    },
-    {
-      "id": "59a0",
-      "theme": "dark"
-    },
-    {
-      "id": "a422",
-      "theme": "light"
-    },
-    {
-      "id": "23f9",
-      "theme": "light"
-    },
-    {
-      "id": "adbb",
-      "theme": "dark"
-    },
-    {
-      "id": "0702",
-      "theme": "light"
-    },
-    {
-      "id": "2a29",
-      "theme": "dark"
-    },
-    {
-      "id": "b5b6",
-      "theme": "light"
-    },
-    {
-      "id": "3398",
-      "theme": "dark"
-    },
-    {
-      "id": "cd8b",
-      "theme": "light"
-    },
-    {
-      "id": "9c39",
-      "theme": "dark"
-    },
-    {
-      "id": "d47c",
-      "theme": "light"
-    },
-    {
-      "id": "d937",
-      "theme": "light"
-    },
-    {
-      "id": "9417",
-      "theme": "dark"
-    },
-    {
-      "id": "dbe4",
-      "theme": "light"
-    },
-    {
-      "id": "c3d1",
-      "theme": "dark"
-    },
-    {
-      "id": "2d3d",
-      "theme": "light"
-    },
-    {
-      "id": "df2f",
-      "theme": "dark"
-    },
-    {
-      "id": "4cd5",
-      "theme": "light"
-    },
-    {
-      "id": "f15c",
-      "theme": "dark"
-    },
-    {
-      "id": "3309",
-      "theme": "light"
-    },
-    {
-      "id": "1621",
-      "theme": "dark"
-    },
-    {
-      "id": "89ad",
-      "theme": "light"
-    },
-    {
-      "id": "51a8",
-      "theme": "dark"
-    },
-    {
-      "id": "3dc1",
-      "theme": "light"
-    },
-    {
-      "id": "4f24",
-      "theme": "dark"
-    },
-    {
-      "id": "a29e",
-      "theme": "light"
-    },
-    {
-      "id": "4399",
-      "theme": "dark"
-    },
-    {
-      "id": "9b9e",
-      "theme": "light"
-    },
-    {
-      "id": "80b7",
-      "theme": "dark"
-    },
-    {
-      "id": "8d9d",
-      "theme": "light"
-    },
-    {
-      "id": "895f",
-      "theme": "dark"
-    },
-    {
-      "id": "d1cb",
-      "theme": "light"
-    },
-    {
-      "id": "6597",
-      "theme": "dark"
-    },
-    {
-      "id": "c432",
-      "theme": "light"
-    },
-    {
-      "id": "d508",
-      "theme": "dark"
-    },
-    {
-      "id": "c085",
-      "theme": "light"
-    },
-    {
-      "id": "9453",
-      "theme": "dark"
-    },
-    {
-      "id": "c179",
-      "theme": "light"
-    },
-    {
-      "id": "1673",
-      "theme": "dark"
-    },
-    {
-      "id": "76cb",
-      "theme": "light"
-    },
-    {
-      "id": "0f06",
-      "theme": "dark"
-    },
-    {
-      "id": "edb5",
-      "theme": "light"
-    },
-    {
-      "id": "ba5f",
-      "theme": "dark"
-    },
-    {
-      "id": "6b62",
-      "theme": "light"
-    },
-    {
-      "id": "c670",
-      "theme": "dark"
-    },
-    {
-      "id": "c91f",
-      "theme": "light"
-    },
-    {
-      "id": "ca99",
-      "theme": "dark"
-    },
-    {
-      "id": "9643",
-      "theme": "light"
-    },
-    {
-      "id": "4c47",
-      "theme": "dark"
-    },
-    {
-      "id": "2e6d",
-      "theme": "light"
-    },
-    {
-      "id": "9562",
-      "theme": "dark"
-    },
-    {
-      "id": "d31f",
-      "theme": "light"
-    },
-    {
-      "id": "03ae",
-      "theme": "dark"
-    },
-    {
-      "id": "d363",
-      "theme": "light"
-    },
-    {
-      "id": "4b83",
-      "theme": "dark"
-    },
-    {
-      "id": "8a13",
-      "theme": "light"
-    },
-    {
-      "id": "ce2b",
-      "theme": "light"
-    },
-    {
-      "id": "9f1c",
-      "theme": "dark"
-    },
-    {
-      "id": "fb30",
-      "theme": "light"
-    },
-    {
-      "id": "6816",
-      "theme": "dark"
-    },
-    {
-      "id": "3f5b",
-      "theme": "light"
-    },
-    {
-      "id": "860a",
-      "theme": "dark"
-    },
-    {
-      "id": "0c72",
-      "theme": "light"
-    },
-    {
-      "id": "1f7a",
-      "theme": "dark"
-    },
-    {
-      "id": "c003",
-      "theme": "light"
-    },
-    {
-      "id": "d48d",
-      "theme": "dark"
-    },
-    {
-      "id": "e6f0",
-      "theme": "light"
-    },
-    {
-      "id": "d89b",
-      "theme": "dark"
-    },
-    {
-      "id": "37b8",
-      "theme": "light"
-    },
-    {
-      "id": "e81e",
-      "theme": "dark"
-    },
-    {
-      "id": "bbc9",
-      "theme": "light"
-    },
-    {
-      "id": "cd5e",
-      "theme": "dark"
-    },
-    {
-      "id": "435a",
-      "theme": "light"
-    },
-    {
-      "id": "bc71",
-      "theme": "dark"
-    },
-    {
-      "id": "f3df",
-      "theme": "light"
-    },
-    {
-      "id": "026b",
-      "theme": "dark"
-    },
-    {
-      "id": "9d6e",
-      "theme": "light"
-    },
-    {
-      "id": "2afe",
-      "theme": "light"
-    },
-    {
-      "id": "6a47",
-      "theme": "dark"
-    },
-    {
-      "id": "c58d",
-      "theme": "light"
-    },
-    {
-      "id": "45bd",
-      "theme": "light"
-    },
-    {
-      "id": "f5b5",
-      "theme": "dark"
-    },
-    {
-      "id": "fff8",
-      "theme": "light"
-    },
-    {
-      "id": "2a2e",
-      "theme": "dark"
-    },
-    {
-      "id": "5b33",
-      "theme": "light"
-    },
-    {
-      "id": "5b59",
-      "theme": "dark"
-    },
-    {
-      "id": "c98c",
-      "theme": "light"
-    },
-    {
-      "id": "5a64",
-      "theme": "dark"
-    },
-    {
-      "id": "f41b",
-      "theme": "light"
-    },
-    {
-      "id": "f95e",
-      "theme": "light"
-    },
-    {
-      "id": "0493",
-      "theme": "dark"
-    },
-    {
-      "id": "056e",
-      "theme": "light"
-    },
-    {
-      "id": "16fe",
-      "theme": "dark"
+      "theme": "dark",
+      "name": "Mamazoe",
+      "accessibility": "normal",
+      "id": "1"
     }
   ],
-  "user": {
-    "id": 1,
-    "email": "admin@geralocal.com",
-    "password": "admin123",
-    "role": "admin",
-    "name": "Administrador"
-  },
+  "products": [
+    {
+      "id": "1",
+      "name": "Produto Exemplo",
+      "price": 99.9,
+      "stock": 10,
+      "category": "Geral",
+      "description": "Descrição do produto exemplo",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "2",
+      "name": "Outro Produto",
+      "price": 149.9,
+      "stock": 5,
+      "category": "Geral",
+      "description": "Descrição de outro produto",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "3",
+      "name": "Produto Especial",
+      "price": 199.9,
+      "stock": 2,
+      "category": "Geral",
+      "description": "Descrição do produto especial",
+      "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "4",
+      "name": "Produto Limitado",
+      "price": 249.9,
+      "stock": 1,
+      "category": "Geral",
+      "description": "Descrição do produto limitado",
+      "image": "https://via.placeholder.com/150"
+    }
+  ],
   "users": [
     {
       "id": "1",
@@ -465,10 +55,10 @@
     },
     {
       "id": "2",
-      "email": "cliente@teste.com",
-      "password": "123456",
-      "role": "customer",
-      "name": "Cliente Teste"
+      "email": "cliente@geralocal.com",
+      "password": "cliente123",
+      "role": "cliente",
+      "name": "Cliente Exemplo"
     }
   ],
   "categories": [
@@ -487,58 +77,10 @@
     {
       "id": "4",
       "name": "Eletrônicos"
-    }
-  ],
-  "products": [
-    {
-      "id": "1",
-      "name": "Camisa Básica",
-      "price": 49.9,
-      "stock": 120,
-      "categoryId": 1,
-      "image": "/images/camisa.jpg"
     },
     {
-      "id": "2",
-      "name": "Tênis Esportivo",
-      "price": 199.9,
-      "stock": 45,
-      "categoryId": 2,
-      "image": "/images/tenis.jpg"
-    },
-    {
-      "id": "3",
-      "name": "Relógio Digital",
-      "price": 299.9,
-      "stock": 30,
-      "categoryId": 3,
-      "image": "/images/relogio.jpg"
-    },
-    {
-      "id": "4",
-      "name": "Fone Bluetooth",
-      "price": 149.9,
-      "stock": 80,
-      "categoryId": 4,
-      "image": "/images/fone.jpg"
-    }
-  ],
-  "orders": [
-    {
-      "id": "1",
-      "userId": 2,
-      "products": [
-        {
-          "productId": 1,
-          "quantity": 2
-        },
-        {
-          "productId": 4,
-          "quantity": 1
-        }
-      ],
-      "status": "pending",
-      "total": 249.7
+      "id": "5",
+      "name": "Casa e Decoração"
     }
   ]
 }

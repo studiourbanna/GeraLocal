@@ -1,10 +1,25 @@
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 export const api = {
-  // HTTP
   get: async (endpoint: string) => {
-    const res = await fetch(`${BASE_URL}/${endpoint}`);
+    // Se for storeConfig, buscamos o primeiro item da lista (ID 1)
+    const url = endpoint === 'storeConfig' ? 'storeConfig/1' : endpoint;
+    const res = await fetch(`${BASE_URL}/${url}`);
     if (!res.ok) throw new Error('Erro ao buscar dados');
+    return res.json();
+  },
+
+  put: async (endpoint: string, data: any) => {
+    // Garantimos que estamos atualizando o registro ID 1
+    const url = endpoint.includes('storeConfig') ? 'storeConfig/1' : endpoint;
+    
+    const res = await fetch(`${BASE_URL}/${url}`, {
+      method: 'PUT', // Ou PATCH se quiser atualizar apenas campos enviados
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    });
+    
+    if (!res.ok) throw new Error('Erro ao atualizar recurso no DB');
     return res.json();
   },
 
@@ -15,16 +30,6 @@ export const api = {
       body: JSON.stringify(data),
     });
     if (!res.ok) throw new Error('Erro ao criar recurso');
-    return res.json();
-  },
-
-  put: async (endpoint: string, data: any) => {
-    const res = await fetch(`${BASE_URL}/${endpoint}`, {
-      method: 'PUT',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(data),
-    });
-    if (!res.ok) throw new Error('Erro ao atualizar recurso');
     return res.json();
   },
 
@@ -44,7 +49,7 @@ export const api = {
     return true;
   },
 
-  // LocalStorage (para storeConfig, theme etc.)
+  // Helpers de LocalStorage
   set: (key: string, value: any) => {
     localStorage.setItem(key, JSON.stringify(value));
   },

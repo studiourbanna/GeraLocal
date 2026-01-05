@@ -1,4 +1,3 @@
-// src/components/shared/Header.tsx
 import React from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
@@ -11,8 +10,9 @@ const Header: React.FC = () => {
   const user = getCurrentUser();
 
   const handleThemeToggle = () => {
-    if (!config) return; // evita erro se ainda não carregou
+    if (!config) return;
     const newTheme = config.theme === 'light' ? 'dark' : 'light';
+    // Isso disparará o PUT para storeConfig/1 via sua api.ts
     updateConfig({ theme: newTheme });
   };
 
@@ -22,61 +22,55 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="flex justify-between items-center p-4 bg-gray-200 dark:bg-gray-800 text-black dark:text-white">
-      {/* Logo com link para a página inicial */}
-      <Link to="/" className="flex items-center gap-2">
-        <h1 className="text-xl font-bold flex items-center gap-2">
-          🏬 GeraLocal
-        </h1>
+    <header className="flex justify-between items-center p-4 bg-gray-200 dark:bg-gray-800 text-black dark:text-white transition-colors sticky top-0 z-50 shadow-sm">
+      {/* Nome da Loja Dinâmico */}
+      <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
+        <div className="flex items-center gap-2">
+          <span className="text-2xl" role="img" aria-label="store">🏬</span>
+          <h1 className="text-xl font-bold tracking-tight">
+            {config?.name || 'GeraLocal'}
+          </h1>
+        </div>
       </Link>
 
       <div className="flex items-center gap-4">
-        {/* Botão de alternância de tema com ícones */}
+        {/* Toggle de Tema */}
         <button
           onClick={handleThemeToggle}
-          className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 flex items-center gap-2"
-          disabled={!config} // desabilita enquanto não carregou
+          title={`Mudar para tema ${config?.theme === 'light' ? 'escuro' : 'claro'}`}
+          className="p-2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700 hover:ring-2 hover:ring-blue-400 transition-all"
+          disabled={!config}
         >
-          {config?.theme === 'light' ? (
-            <>
-              🌞 <span>Claro</span>
-            </>
-          ) : (
-            <>
-              🌙 <span>Escuro</span>
-            </>
-          )}
+          {config?.theme === 'light' ? '🌞' : '🌙'}
         </button>
 
         {user ? (
-          <>
-            <span>{user.name}</span>
+          <div className="flex items-center gap-4 border-l border-gray-400 dark:border-gray-600 pl-4">
+            <div className="hidden sm:block text-right">
+              <p className="text-xs text-gray-500 dark:text-gray-400">Olá,</p>
+              <p className="text-sm font-bold leading-none">{user.name}</p>
+            </div>
 
-            {/* Link visível apenas para administradores */}
             {user.role === 'admin' && (
               <Link
                 to="/dashboard"
-                className="px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600 transition-colors"
+                className="px-3 py-1.5 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm"
               >
-                Gerenciar Produtos
+                Painel
               </Link>
             )}
 
             <button
               onClick={handleLogout}
-              className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 transition-colors"
+              className="text-sm font-medium text-red-600 dark:text-red-400 hover:underline"
             >
               Sair
             </button>
-          </>
+          </div>
         ) : (
           <button
             onClick={() => navigate('/login')}
-            className="px-3 py-1 rounded 
-                       bg-blue-500 text-white 
-                       hover:bg-blue-600 
-                       dark:bg-yellow-500 dark:hover:bg-yellow-600 
-                       transition-colors"
+            className="px-5 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 dark:bg-yellow-500 dark:text-black transition-all"
           >
             Entrar
           </button>

@@ -1,41 +1,29 @@
 import { Product } from '../models/Product';
-import { storageService } from '../services/storage';
+import { api } from '../services/api';
 
 export class ProductViewModel {
   private products: Product[] = [];
 
-  constructor() {
-    const data = storageService.getProducts();
-    // garante que products seja sempre array
+  async getProducts(): Promise<Product[]> {
+    const data = await api.get('products');
     this.products = Array.isArray(data) ? data : [];
+    return this.products;
   }
 
-  getProducts(): Product[] {
-    // reforço: sempre retorna array
-    return Array.isArray(this.products) ? this.products : [];
+  async addProduct(product: Omit<Product, 'id'>): Promise<Product> {
+    const savedProduct = await api.post('products', product);
+    this.products.push(savedProduct);
+    return savedProduct;
   }
 
-  addProduct(product: Omit<Product, 'id'>) {
-    const newProduct: Product = { ...product, id: Date.now().toString() };
-    this.products.push(newProduct);
-    this.save();
+  async updateProduct(id: string, updates: Partial<Product>): Promise<Product> {
+    const updatedProduct = await api.put(`products/${id}`, updates);
+    this.products = this.products.map(p => p.id === id ? updatedProduct : p);
+    return updatedProduct;
   }
 
-  updateProduct(id: string, updates: Partial<Product>) {
-    const index = this.products.findIndex(p => p.id === id);
-    if (index !== -1) {
-      this.products[index] = { ...this.products[index], ...updates };
-      this.save();
-    }
-  }
-
-  deleteProduct(id: string) {
+  async deleteProduct(id: string): Promise<void> {
+    await api.delete('products', id);
     this.products = this.products.filter(p => p.id !== id);
-    this.save();
-  }
-
-  private save() {
-    // garante que salva sempre array
-    storageService.saveProducts(Array.isArray(this.products) ? this.products : []);
   }
 }
