@@ -4,6 +4,16 @@ import { useTheme } from '../../contexts/ThemeContext';
 const SettingsTab: React.FC = () => {
   const { config, updateConfig } = useTheme();
 
+  // Se ainda não carregou a configuração, mostra um fallback
+  if (!config) {
+    return (
+      <div className="bg-white dark:bg-gray-800 p-6 rounded shadow text-black dark:text-white">
+        <h3 className="text-xl mb-4">⚙️ Configurações da Loja</h3>
+        <p>Carregando configurações...</p>
+      </div>
+    );
+  }
+
   return (
     <div className="bg-white dark:bg-gray-800 p-6 rounded shadow text-black dark:text-white">
       <h3 className="text-xl mb-4">⚙️ Configurações da Loja</h3>

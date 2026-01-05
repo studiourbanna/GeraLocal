@@ -11,6 +11,7 @@ const Header: React.FC = () => {
   const user = getCurrentUser();
 
   const handleThemeToggle = () => {
+    if (!config) return; // evita erro se ainda não carregou
     const newTheme = config.theme === 'light' ? 'dark' : 'light';
     updateConfig({ theme: newTheme });
   };
@@ -34,8 +35,9 @@ const Header: React.FC = () => {
         <button
           onClick={handleThemeToggle}
           className="px-3 py-1 rounded bg-gray-300 dark:bg-gray-700 flex items-center gap-2"
+          disabled={!config} // desabilita enquanto não carregou
         >
-          {config.theme === 'light' ? (
+          {config?.theme === 'light' ? (
             <>
               🌞 <span>Claro</span>
             </>
