@@ -6,14 +6,6 @@
 [![GitHub issues](https://img.shields.io/github/issues/studiourbanna/GeraLocal?style=for-the-badge)](https://github.com/studiourbanna/GeraLocal/issues)
 [![GitHub donate](https://img.shields.io/github/sponsors/clcmo?color=pink&style=for-the-badge)](https://github.com/sponsors/clcmo)
 
-# 🛍️ GeraLocal: E-commerce Admin Panel
-
-[![GitHub license](https://img.shields.io/github/license/studiourbanna/GeraLocal?style=for-the-badge)](https://github.com/studiourbanna/GeraLocal)
-[![GitHub stars](https://img.shields.io/github/stars/studiourbanna/GeraLocal?style=for-the-badge)](https://github.com/studiourbanna/GeraLocal/stargazers)
-[![GitHub forks](https://img.shields.io/github/forks/studiourbanna/GeraLocal?style=for-the-badge)](https://github.com/studiourbanna/GeraLocal/network)
-[![GitHub issues](https://img.shields.io/github/issues/studiourbanna/GeraLocal?style=for-the-badge)](https://github.com/studiourbanna/GeraLocal/issues)
-[![GitHub donate](https://img.shields.io/github/sponsors/clcmo?color=pink&style=for-the-badge)](https://github.com/sponsors/clcmo)
-
 Sistema completo de e-commerce com painel administrativo, seguindo arquitetura MVVM modularizada, com suporte a temas, acessibilidade e SEO otimizado.
 
 ---
