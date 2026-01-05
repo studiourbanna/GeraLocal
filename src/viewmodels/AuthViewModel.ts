@@ -9,10 +9,9 @@ export class AuthViewModel {
   }
 
   // login agora é assíncrono para refletir o authService
-  async login(email: string, password: string): Promise<boolean> {
-    const loggedUser = await authService.login(email, password);
-    this.user = loggedUser;
-    return this.user !== null;
+  async login(email: string, password: string): Promise<User | null> { 
+    const loggedUser = await authService.login(email, password); 
+    this.user = loggedUser; return this.user; 
   }
 
   logout() {

@@ -9,7 +9,8 @@ import { StoreProvider } from './contexts/StoreContext';
 import LandingPage from './components/public/LandingPage';
 import LoginPage from './components/auth/LoginPage';
 import PasswordlessLogin from './components/auth/PasswordlessLogin';
-import Dashboard from './components/admin/Dashboard'; // ✅ importe o Dashboard
+import Dashboard from './components/admin/Dashboard';
+import PrivateRoute from './components/admin/PrivateRoute';
 
 function App() {
   return (
@@ -22,8 +23,15 @@ function App() {
               <Route path="/" element={<LandingPage />} />
               <Route path="/login" element={<LoginPage />} />
               <Route path="/passwordless" element={<PasswordlessLogin />} />
-              {/* ✅ rota para o Dashboard */}
-              <Route path="/dashboard" element={<Dashboard />} />
+              {/* ✅ rota protegida */}
+              <Route
+                path="/dashboard"
+                element={
+                  <PrivateRoute role="admin">
+                    <Dashboard />
+                  </PrivateRoute>
+                }
+              />
             </Routes>
           </BrowserRouter>
         </StoreProvider>

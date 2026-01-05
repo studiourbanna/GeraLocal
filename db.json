@@ -1,7 +1,7 @@
 {
   "storeConfig": [
     {
-      "id": 1,
+      "id": "1",
       "name": "GeraLocal Store",
       "themeColor": "#8B5CF6",
       "currency": "BRL",
@@ -382,6 +382,54 @@
     {
       "id": "9d6e",
       "theme": "light"
+    },
+    {
+      "id": "2afe",
+      "theme": "light"
+    },
+    {
+      "id": "6a47",
+      "theme": "dark"
+    },
+    {
+      "id": "c58d",
+      "theme": "light"
+    },
+    {
+      "id": "45bd",
+      "theme": "light"
+    },
+    {
+      "id": "f5b5",
+      "theme": "dark"
+    },
+    {
+      "id": "fff8",
+      "theme": "light"
+    },
+    {
+      "id": "2a2e",
+      "theme": "dark"
+    },
+    {
+      "id": "5b33",
+      "theme": "light"
+    },
+    {
+      "id": "5b59",
+      "theme": "dark"
+    },
+    {
+      "id": "c98c",
+      "theme": "light"
+    },
+    {
+      "id": "5a64",
+      "theme": "dark"
+    },
+    {
+      "id": "f41b",
+      "theme": "light"
     }
   ],
   "user": {
@@ -393,14 +441,14 @@
   },
   "users": [
     {
-      "id": 1,
+      "id": "1",
       "email": "admin@geralocal.com",
       "password": "admin123",
       "role": "admin",
       "name": "Administrador"
     },
     {
-      "id": 2,
+      "id": "2",
       "email": "cliente@teste.com",
       "password": "123456",
       "role": "customer",
@@ -409,25 +457,25 @@
   ],
   "categories": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Roupas"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Calçados"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Acessórios"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Eletrônicos"
     }
   ],
   "products": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Camisa Básica",
       "price": 49.9,
       "stock": 120,
@@ -435,7 +483,7 @@
       "image": "/images/camisa.jpg"
     },
     {
-      "id": 2,
+      "id": "2",
       "name": "Tênis Esportivo",
       "price": 199.9,
       "stock": 45,
@@ -443,7 +491,7 @@
       "image": "/images/tenis.jpg"
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Relógio Digital",
       "price": 299.9,
       "stock": 30,
@@ -451,7 +499,7 @@
       "image": "/images/relogio.jpg"
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Fone Bluetooth",
       "price": 149.9,
       "stock": 80,
@@ -461,7 +509,7 @@
   ],
   "orders": [
     {
-      "id": 1,
+      "id": "1",
       "userId": 2,
       "products": [
         {

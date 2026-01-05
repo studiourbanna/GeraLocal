@@ -1,18 +1,37 @@
 import React, { useState } from 'react';
+import { useAuth } from '../../contexts/AuthContext';
 import { validateEmail } from '../../utils/validators';
+import { useNavigate } from 'react-router-dom';
 
 const PasswordlessLogin: React.FC = () => {
+  const { login, getCurrentUser } = useAuth();
   const [email, setEmail] = useState('');
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!validateEmail(email)) {
-      setMessage('Email inválido');
+      setError('Email inválido');
       return;
     }
-    // Simulação de envio de link
-    setMessage('Link de login enviado para seu email!');
+
+    // Simulação de login sem senha
+    const success = await login(email, ''); // pode ser adaptado conforme sua lógica
+    if (!success) {
+      setError('Não foi possível autenticar');
+    } else {
+      setError('');
+      setMessage('Login realizado com sucesso!');
+
+      const user = getCurrentUser();
+      if (user?.role === 'admin') {
+        navigate('/dashboard');
+      } else {
+        navigate('/');
+      }
+    }
   };
 
   return (
@@ -22,6 +41,7 @@ const PasswordlessLogin: React.FC = () => {
         className="bg-white dark:bg-gray-800 p-8 rounded shadow-md w-96"
       >
         <h2 className="text-2xl mb-4">Login sem Senha</h2>
+        {error && <p className="text-red-500 mb-4">{error}</p>}
         {message && <p className="text-green-500 mb-4">{message}</p>}
         <input
           type="email"
