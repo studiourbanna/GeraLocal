@@ -1,13 +1,26 @@
 import { Product } from '../models/Product';
+import { Category } from '../models/Category';
 import { api } from '../services/api';
 
 export class ProductViewModel {
   private products: Product[] = [];
+  private categories: Category[] = [];
 
   async getProducts(): Promise<Product[]> {
     const data = await api.get('products');
     this.products = Array.isArray(data) ? data : [];
     return this.products;
+  }
+
+  async getCategories(): Promise<Category[]> {
+    const data = await api.get('categories');
+    this.categories = Array.isArray(data) ? data : [];
+    return this.categories;
+  }
+
+  filterProducts(categoryId: string): Product[] {
+    if (!categoryId || categoryId === 'all') return this.products;
+    return this.products.filter(p => p.categoryId === categoryId);
   }
 
   async addProduct(product: Omit<Product, 'id'>): Promise<Product> {
