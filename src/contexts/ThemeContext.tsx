@@ -3,24 +3,30 @@ import { StoreConfig } from '../models/StoreConfig';
 import { StoreViewModel } from '../viewmodels/StoreViewModel';
 
 interface ThemeContextType {
-  config: StoreConfig;
-  updateConfig: (updates: Partial<StoreConfig>) => void;
+  config: StoreConfig | null;
+  updateConfig: (updates: Partial<StoreConfig>) => Promise<void>;
 }
 
 const ThemeContext = createContext<ThemeContextType | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [viewModel] = useState(() => new StoreViewModel());
-  const [config, setConfig] = useState(viewModel.getConfig());
+  const [config, setConfig] = useState<StoreConfig | null>(null);
 
-  const updateConfig = (updates: Partial<StoreConfig>) => {
-    viewModel.updateConfig(updates);
-    setConfig(viewModel.getConfig());
-  };
-
+  // Carrega configuração inicial da loja
   useEffect(() => {
-    document.documentElement.className = config.theme;
-  }, [config.theme]);
+    (async () => {
+      const initialConfig = await viewModel.getConfig();
+      setConfig(initialConfig);
+      document.documentElement.className = initialConfig.theme;
+    })();
+  }, [viewModel]);
+
+  const updateConfig = async (updates: Partial<StoreConfig>) => {
+    const updatedConfig = await viewModel.updateConfig(updates);
+    setConfig(updatedConfig);
+    document.documentElement.className = updatedConfig.theme;
+  };
 
   return (
     <ThemeContext.Provider value={{ config, updateConfig }}>
