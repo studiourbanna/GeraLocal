@@ -4,15 +4,13 @@ import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate, Link } from 'react-router-dom';
 
 const Header: React.FC = () => {
-  const { getCurrentUser, logout } = useAuth();
+  const { user, logout } = useAuth(); 
   const { config, updateConfig } = useTheme();
   const navigate = useNavigate();
-  const user = getCurrentUser();
 
   const handleThemeToggle = () => {
     if (!config) return;
     const newTheme = config.theme === 'light' ? 'dark' : 'light';
-    // Isso disparará o PUT para storeConfig/1 via sua api.ts
     updateConfig({ theme: newTheme });
   };
 
@@ -23,12 +21,12 @@ const Header: React.FC = () => {
 
   return (
     <header className="flex justify-between items-center p-4 bg-gray-200 dark:bg-gray-800 text-black dark:text-white transition-colors sticky top-0 z-50 shadow-sm">
-      {/* Nome da Loja Dinâmico */}
+      {/* Nome da Loja: Agora lê o objeto 'config' limpo pela ViewModel */}
       <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
         <div className="flex items-center gap-2">
           <span className="text-2xl" role="img" aria-label="store">🏬</span>
           <h1 className="text-xl font-bold tracking-tight">
-            {config?.name || 'GeraLocal'}
+            {config?.name || 'Carregando...'}
           </h1>
         </div>
       </Link>
@@ -51,12 +49,20 @@ const Header: React.FC = () => {
               <p className="text-sm font-bold leading-none">{user.name}</p>
             </div>
 
-            {user.role === 'admin' && (
+            {/* Acesso Dinâmico baseado no Role */}
+            {user.role === 'admin' ? (
               <Link
                 to="/dashboard"
                 className="px-3 py-1.5 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm"
               >
-                Painel
+                Painel Admin
+              </Link>
+            ) : (
+              <Link
+                to="/client-dashboard"
+                className="px-3 py-1.5 rounded-md bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors shadow-sm"
+              >
+                Meu Painel
               </Link>
             )}
 

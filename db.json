@@ -57,8 +57,34 @@
       "id": "2",
       "email": "cliente@geralocal.com",
       "password": "cliente123",
-      "role": "cliente",
-      "name": "Cliente Exemplo"
+      "role": "user",
+      "name": "Cliente Exemplo",
+      "favorites": [
+        "2",
+        "3"
+      ],
+      "cart": []
+    },
+    {
+      "id": "3",
+      "email": "joao@geralocal.com",
+      "password": "joao123",
+      "role": "user",
+      "name": "João Silva",
+      "favorites": [
+        "1",
+        "5"
+      ],
+      "cart": [
+        {
+          "productId": "1",
+          "quantity": 2
+        },
+        {
+          "productId": "6",
+          "quantity": 1
+        }
+      ]
     }
   ],
   "categories": [

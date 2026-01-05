@@ -31,9 +31,11 @@ const LoginPage: React.FC = () => {
       const user = getCurrentUser();
 
       if (user?.role === 'admin') {
-        navigate('/dashboard', {
-          state: { successMessage: `Bem-vindo, ${user.name}!` },
-        });
+        navigate('/dashboard');
+        state: { successMessage: `Login bem-sucedido! Bem-vindo, ${user?.name}!` };
+      } else if (user?.role === 'user') {
+        navigate('/client-dashboard');
+        state: { successMessage: `Login bem-sucedido! Bem-vindo, ${user?.name}!` };
       } else {
         navigate('/', {
           state: { successMessage: `Login bem-sucedido! Bem-vindo, ${user?.name}!` },

@@ -3,6 +3,7 @@ import { AuthViewModel } from '../viewmodels/AuthViewModel';
 import { User } from '../models/User';
 
 interface AuthContextType {
+  user: User | null;
   viewModel: AuthViewModel;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
@@ -42,6 +43,7 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
   return (
     <AuthContext.Provider 
       value={{ 
+        user: getCurrentUser(),
         viewModel, 
         login, 
         logout, 

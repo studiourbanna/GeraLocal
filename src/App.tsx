@@ -10,6 +10,7 @@ import LoginPage from './components/auth/LoginPage';
 import PasswordlessLogin from './components/auth/PasswordlessLogin';
 import Dashboard from './components/admin/Dashboard';
 import PrivateRoute from './components/admin/PrivateRoute';
+import CustomerDashboard from './components/public/CustomerDashboard';
 
 function App() {
   return (
@@ -28,6 +29,14 @@ function App() {
                 element={
                   <PrivateRoute role="admin">
                     <Dashboard />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/client-dashboard"
+                element={
+                  <PrivateRoute role="user">
+                    <CustomerDashboard />
                   </PrivateRoute>
                 }
               />

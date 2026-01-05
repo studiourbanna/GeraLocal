@@ -1,5 +1,6 @@
 import { User } from '../models/User';
 import { authService } from '../services/auth';
+import { api } from '../services/api';
 
 export class AuthViewModel {
   private user: User | null = null;
@@ -42,5 +43,41 @@ export class AuthViewModel {
 
   getUserName(): string | null {
     return this.user?.name ?? null;
+  }
+
+    async toggleFavorite(productId: string): Promise<void> {
+    if (!this.user) return;
+
+    const favorites = this.user.favorites || [];
+    const index = favorites.indexOf(productId);
+    
+    if (index > -1) {
+      favorites.splice(index, 1); // Remove
+    } else {
+      favorites.push(productId); // Adiciona
+    }
+
+    const updatedUser = await api.put(`users/${this.user.id}`, { ...this.user, favorites });
+    this.user = updatedUser;
+  }
+
+  async updateCart(productId: string, quantity: number): Promise<void> {
+    if (!this.user) return;
+
+    let cart = this.user.cart || [];
+    const itemIndex = cart.findIndex(item => item.productId === productId);
+
+    if (itemIndex > -1) {
+      if (quantity <= 0) {
+        cart = cart.filter(item => item.productId !== productId);
+      } else {
+        cart[itemIndex].quantity = quantity;
+      }
+    } else if (quantity > 0) {
+      cart.push({ productId, quantity });
+    }
+
+    const updatedUser = await api.put(`users/${this.user.id}`, { ...this.user, cart });
+    this.user = updatedUser;
   }
 }
