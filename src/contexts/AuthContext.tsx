@@ -7,56 +7,54 @@ interface AuthContextType {
   viewModel: AuthViewModel;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  getCurrentUser: () => User | null;
-  isAuthenticated: boolean;
+  isAuthenticated: boolean; // Derivado do user
   toggleFavorite: (productId: string) => Promise<void>;
+  addToCart: (productId: string, quantity: number) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  // Instância do AuthViewModel
   const [viewModel] = useState(() => new AuthViewModel());
-  const [user, setUser] = useState<User | null>(viewModel.getCurrentUser());
   
-  // Estado para rastrear autenticação
-  const [isAuthenticated, setIsAuthenticated] = useState<boolean>(() => {
-    return viewModel.getCurrentUser() !== null;
-  });
+  const [user, setUser] = useState<User | null>(() => viewModel.currentUser);
 
-  // Login com memoização e atualização de estado - corrigido
+  const sync = useCallback(() => {
+    const currentUser = viewModel.currentUser;
+    setUser(currentUser ? { ...currentUser } : null);
+  }, [viewModel]);
+
   const login = useCallback(async (email: string, password: string): Promise<boolean> => {
     const success = await viewModel.login(email, password);
-    setIsAuthenticated(success); // Agora recebe boolean diretamente
+    if (success) sync();
     return success;
-  }, [viewModel]);
+  }, [viewModel, sync]);
 
-  // Logout com atualização de estado
   const logout = useCallback(() => {
     viewModel.logout();
-    setIsAuthenticated(false);
-  }, [viewModel]);
-
-  // Get current user
-  const getCurrentUser = useCallback((): User | null => {
-    return viewModel.getCurrentUser();
+    setUser(null);
   }, [viewModel]);
 
   const toggleFavorite = async (productId: string) => {
-    await viewModel.toggleFavorite(productId); // Chama a lógica na ViewModel
-    setUser({ ...viewModel.getCurrentUser()! }); // Atualiza o estado para o React renderizar a mudança
+    await viewModel.toggleFavorite(productId);
+    sync(); 
+  };
+
+  const addToCart = async (productId: string, quantity: number) => {
+    await viewModel.updateCart(productId, quantity);
+    sync(); 
   };
 
   return (
     <AuthContext.Provider 
       value={{ 
-        user: getCurrentUser(),
+        user, 
         viewModel, 
         login, 
-        logout, 
-        getCurrentUser,
-        isAuthenticated,
-        toggleFavorite
+        logout,
+        isAuthenticated: !!user, 
+        toggleFavorite,
+        addToCart
       }}
     >
       {children}
@@ -66,8 +64,6 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
 export const useAuth = () => {
   const context = useContext(AuthContext);
-  if (!context) {
-    throw new Error('useAuth must be used within AuthProvider');
-  }
+  if (!context) throw new Error('useAuth must be used within AuthProvider');
   return context;
 };
