@@ -1,4 +1,5 @@
 import { User } from '../models/User';
+import { Order } from '../models/Order';
 import { authService } from '../services/auth';
 import { api } from '../services/api';
 
@@ -69,12 +70,31 @@ export class AuthViewModel {
       cart.push({ productId, quantity });
     }
 
-    const response = await api.put(`users/${this.user.id}`, { 
-      ...this.user, 
-      cart 
+    const response = await api.put(`users/${this.user.id}`, {
+      ...this.user,
+      cart
     });
 
     await this.persistUser(response);
+  }
+
+  async placeOrder(orderData: Omit<Order, 'id'>): Promise<boolean> {
+    if (!this.user) return false;
+
+    try {
+      await api.post('orders', orderData);
+
+      const updatedUser = { ...this.user, cart: [] };
+      const response = await api.put(`users/${this.user.id}`, updatedUser);
+
+      this.user = response;
+      localStorage.setItem('user', JSON.stringify(response));
+
+      return true;
+    } catch (error) {
+      console.error("Erro ao processar pedido:", error);
+      return false;
+    }
   }
 
   getCurrentUser(): User | null { return this.user; }

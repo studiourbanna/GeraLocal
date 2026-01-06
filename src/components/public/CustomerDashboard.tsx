@@ -5,11 +5,11 @@ import { api } from '../../services/api';
 import ProductCard from '../public/ProductCard';
 
 export const CustomerDashboard: React.FC = () => {
-  const { user, addToCart } = useAuth();
-  const [favoriteProducts, setFavoriteProducts] = useState<Product[]>([]);
-  const [allProducts, setAllProducts] = useState<Product[]>([]); // Guardamos todos para facilitar o mapeamento do carrinho
-  const [loading, setLoading] = useState(true);
+  const { user, addToCart, viewModel } = useAuth();
   
+  const [favoriteProducts, setFavoriteProducts] = useState<Product[]>([]);
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
   const [isCheckingOut, setIsCheckingOut] = useState(false);
   const [address, setAddress] = useState({ street: '', city: '', zip: '' });
 
@@ -45,28 +45,41 @@ export const CustomerDashboard: React.FC = () => {
     return cartDetails.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
   }, [cartDetails]);
 
+  if (!user) return <div className="p-20 text-center dark:text-white font-bold">⚠️ Faça login.</div>;
+
   const handlePlaceOrder = async () => {
+    if (!user) return;
+
     if (!address.street || !address.city || !address.zip) {
       alert("Por favor, preencha todos os campos de endereço!");
       return;
     }
 
-    const newOrder = {
-      userId: user?.id,
-      items: cartDetails.map(item => ({ id: item.product.id, name: item.product.name, qty: item.quantity })),
+    const orderData = {
+      userId: user.id, // TS agora sabe que id existe aqui
+      items: cartDetails.map(item => ({
+        id: item.product.id,
+        name: item.product.name,
+        price: item.product.price,
+        quantity: item.quantity
+      })),
       total: total,
       address: address,
-      date: new Date().toISOString(),
-      status: 'pending'
+      date: new Date().toLocaleString('pt-BR'),
+      status: 'pending' as const
     };
 
-    console.log("Pedido Finalizado:", newOrder);
-    alert("Pedido realizado com sucesso!");
-    setIsCheckingOut(false);
-    // Aqui você poderia chamar uma função para limpar o carrinho
-  };
+    // 4. viewModel agora está disponível via useAuth()
+    const success = await viewModel.placeOrder(orderData);
 
-  if (!user) return <div className="p-20 text-center dark:text-white font-bold">⚠️ Faça login.</div>;
+    if (success) {
+      alert("🎉 Pedido realizado com sucesso! Você pode acompanhar o status em breve.");
+      setIsCheckingOut(false);
+      setAddress({ street: '', city: '', zip: '' });
+    } else {
+      alert("❌ Ocorreu um erro ao processar seu pedido. Tente novamente.");
+    }
+  };
 
   return (
     <div className="p-8 grid grid-cols-1 lg:grid-cols-3 gap-8 bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors">
@@ -102,7 +115,7 @@ export const CustomerDashboard: React.FC = () => {
 
         {!isCheckingOut ? (
           <>
-            <div className="min-h-[100px] space-y-3 mb-4 border-b pb-4 dark:border-gray-700">
+            <div className="min-h-[100px] space-y-3 mb-4 border-b pb-4 dark:border-gray-700 overflow-y-auto max-h-60">
               {cartDetails.length === 0 ? (
                 <p className="text-center text-gray-400 py-4">Carrinho vazio</p>
               ) : (
@@ -125,7 +138,7 @@ export const CustomerDashboard: React.FC = () => {
               <span>Total:</span>
               <span className="text-green-600">R$ {total.toFixed(2)}</span>
             </div>
-            <button 
+            <button
               onClick={() => setIsCheckingOut(true)}
               disabled={cartDetails.length === 0}
               className="w-full bg-blue-600 text-white py-4 rounded-lg font-bold hover:bg-blue-700 disabled:bg-gray-400 transition-all"
@@ -135,21 +148,21 @@ export const CustomerDashboard: React.FC = () => {
           </>
         ) : (
           <div className="space-y-4">
-            <input 
-              type="text" placeholder="Rua e Número" 
+            <input
+              type="text" placeholder="Rua e Número"
               className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
-              value={address.street} onChange={e => setAddress({...address, street: e.target.value})}
+              value={address.street} onChange={e => setAddress({ ...address, street: e.target.value })}
             />
             <div className="grid grid-cols-2 gap-2">
-              <input 
-                type="text" placeholder="Cidade" 
+              <input
+                type="text" placeholder="Cidade"
                 className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
-                value={address.city} onChange={e => setAddress({...address, city: e.target.value})}
+                value={address.city} onChange={e => setAddress({ ...address, city: e.target.value })}
               />
-              <input 
-                type="text" placeholder="CEP" 
+              <input
+                type="text" placeholder="CEP"
                 className="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"
-                value={address.zip} onChange={e => setAddress({...address, zip: e.target.value})}
+                value={address.zip} onChange={e => setAddress({ ...address, zip: e.target.value })}
               />
             </div>
             <div className="flex gap-2 pt-4">
