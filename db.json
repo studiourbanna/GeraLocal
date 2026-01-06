@@ -68,16 +68,7 @@
       "favorites": [
         "1"
       ],
-      "cart": [
-        {
-          "productId": "3",
-          "quantity": 1
-        },
-        {
-          "productId": "1",
-          "quantity": 1
-        }
-      ]
+      "cart": []
     },
     {
       "id": "3",
@@ -121,6 +112,28 @@
     {
       "id": "5",
       "name": "Casa e Decoração"
+    }
+  ],
+  "orders": [
+    {
+      "id": "be1a",
+      "userId": "2",
+      "items": [
+        {
+          "id": "3",
+          "name": "Produto Especial",
+          "price": 199.9,
+          "quantity": 1
+        }
+      ],
+      "total": 199.9,
+      "address": {
+        "street": "Avenida Campy, 15",
+        "city": "Carapicuiba",
+        "zip": "06384000"
+      },
+      "date": "06/01/2026, 14:01:35",
+      "status": "pending"
     }
   ]
 }

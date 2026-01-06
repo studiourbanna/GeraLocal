@@ -97,6 +97,18 @@ export class AuthViewModel {
     }
   }
 
+  async getUserOrders(): Promise<Order[]> {
+    if (!this.user) return [];
+    try {
+      // O json-server permite filtrar usando ?userId=X
+      const response = await api.get(`orders?userId=${this.user.id}`);
+      return Array.isArray(response) ? response : [];
+    } catch (error) {
+      console.warn("Rota de pedidos não encontrada ou vazia. Retornando [].");
+      return []; // Retorna vazio em vez de estourar um erro no console
+    }
+  }
+
   getCurrentUser(): User | null { return this.user; }
   get isLoggedIn(): boolean { return this.user !== null; }
 }
