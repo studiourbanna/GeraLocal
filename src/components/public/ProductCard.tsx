@@ -8,6 +8,8 @@ interface ProductCardProps {
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { user, toggleFavorite, addToCart } = useAuth();
+  const isAdmin = user?.role === 'admin';
+  const isCustomer = !isAdmin;
 
   const isFavorite = user?.favorites?.includes(product.id);
 
@@ -27,32 +29,51 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       alert("Por favor, faça login para comprar!");
       return;
     }
-    // Adiciona 1 unidade por padrão ao clicar no card
     addToCart(product.id, 1);
   };
 
   return (
     <div className="relative border p-4 rounded-lg bg-white dark:bg-gray-800 shadow-sm group">
-      {/* Botão de Favorito */}
-      <button
-        onClick={handleFavoriteClick}
-        className="absolute top-2 right-2 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-700/80 shadow-md transition-transform hover:scale-110"
-      >
-        <span className={isFavorite ? "text-red-500" : "text-gray-400"}>
-          {isFavorite ? '❤️' : '🤍'}
-        </span>
-      </button>
+      
+      {/* Usando isCustomer aqui remove o erro TS6133 */}
+      {isCustomer && (
+        <button
+          onClick={handleFavoriteClick}
+          className="absolute top-2 right-2 z-10 p-2 rounded-full bg-white/80 dark:bg-gray-700/80 shadow-md transition-transform hover:scale-110"
+        >
+          <span className={isFavorite ? "text-red-500" : "text-gray-400"}>
+            {isFavorite ? '❤️' : '🤍'}
+          </span>
+        </button>
+      )}
 
-      <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded-md mb-4" />
-      <h3 className="font-bold dark:text-white">{product.name}</h3>
-      <p className="text-blue-600 font-bold">R$ {product.price.toFixed(2)}</p>
+      <img 
+        src={product.image} 
+        alt={product.name} 
+        className="w-full h-40 object-cover rounded-md mb-4" 
+      />
+      
+      <h3 className="font-bold dark:text-white truncate">{product.name}</h3>
+      <p className="text-blue-600 font-bold text-lg">
+        R$ {product.price.toFixed(2)}
+      </p>
 
-      <button
-        onClick={handleAddToCart}
-        className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
-      >
-        <span>🛒</span> Adicionar ao Carrinho
-      </button>
+      {/* Usando isCustomer aqui também */}
+      {isCustomer && (
+        <button
+          onClick={handleAddToCart}
+          className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+        >
+          <span>🛒</span> Adicionar ao Carrinho
+        </button>
+      )}
+
+      {/* Indicador exclusivo para o Admin */}
+      {isAdmin && (
+        <div className="mt-4 p-2 bg-gray-100 dark:bg-gray-800 border border-dashed border-gray-300 dark:border-gray-600 rounded text-center text-xs text-gray-500 font-medium">
+          Visualização do Administrador
+        </div>
+      )}
     </div>
   );
 };

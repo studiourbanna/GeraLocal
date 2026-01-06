@@ -51,7 +51,13 @@
       "email": "admin@geralocal.com",
       "password": "admin123",
       "role": "admin",
-      "name": "Administrador"
+      "name": "Administrador",
+      "cart": [
+        {
+          "productId": "2",
+          "quantity": 1
+        }
+      ]
     },
     {
       "id": "2",
@@ -65,6 +71,10 @@
       "cart": [
         {
           "productId": "3",
+          "quantity": 1
+        },
+        {
+          "productId": "1",
           "quantity": 1
         }
       ]
