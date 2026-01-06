@@ -62,7 +62,12 @@
       "favorites": [
         "1"
       ],
-      "cart": []
+      "cart": [
+        {
+          "productId": "3",
+          "quantity": 1
+        }
+      ]
     },
     {
       "id": "3",

@@ -7,9 +7,8 @@ interface ProductCardProps {
 }
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
-  const { user, toggleFavorite } = useAuth(); // Certifique-se que toggleFavorite está no Context
+  const { user, toggleFavorite, addToCart } = useAuth();
 
-  // Verifica se este produto está na lista de favoritos do usuário
   const isFavorite = user?.favorites?.includes(product.id);
 
   const handleFavoriteClick = (e: React.MouseEvent) => {
@@ -20,6 +19,16 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     } else {
       alert("Faça login para favoritar produtos!");
     }
+  };
+
+  const handleAddToCart = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!user) {
+      alert("Por favor, faça login para comprar!");
+      return;
+    }
+    // Adiciona 1 unidade por padrão ao clicar no card
+    addToCart(product.id, 1);
   };
 
   return (
@@ -37,9 +46,12 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
       <img src={product.image} alt={product.name} className="w-full h-40 object-cover rounded-md mb-4" />
       <h3 className="font-bold dark:text-white">{product.name}</h3>
       <p className="text-blue-600 font-bold">R$ {product.price.toFixed(2)}</p>
-      
-      <button className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors">
-        Adicionar ao Carrinho
+
+      <button
+        onClick={handleAddToCart}
+        className="w-full mt-4 bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition-colors flex items-center justify-center gap-2"
+      >
+        <span>🛒</span> Adicionar ao Carrinho
       </button>
     </div>
   );
