@@ -10,7 +10,7 @@ import LoginPage from './components/auth/LoginPage';
 import PasswordlessLogin from './components/auth/PasswordlessLogin';
 import Dashboard from './components/admin/Dashboard';
 import PrivateRoute from './components/admin/PrivateRoute';
-import CustomerDashboard from './components/public/CustomerDashboard';
+import CustomerDashboard from './components/user/Dashboard';
 
 function App() {
   return (
@@ -33,7 +33,7 @@ function App() {
                 }
               />
               <Route
-                path="/client-dashboard"
+                path="/profile"
                 element={
                   <PrivateRoute role="user">
                     <CustomerDashboard />

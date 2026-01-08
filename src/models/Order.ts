@@ -16,5 +16,9 @@ export interface Order {
     zip: string;
   };
   date: string;
-  status: 'pending' | 'shipped' | 'delivered' | 'cancelled';
+  status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
+}
+
+export interface OrdersTabProps {
+  myOrders: Order[];
 }

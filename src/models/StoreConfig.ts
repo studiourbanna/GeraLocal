@@ -5,6 +5,7 @@ export interface StoreConfig {
   accessibility: 'normal' | 'protanopia' | 'deuteranopia' | 'tritanopia';
   categoryId?: string;
   address?: {
+    zip: string;
     street: string;
     number: string;
     city: string;

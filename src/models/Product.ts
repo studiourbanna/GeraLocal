@@ -20,3 +20,8 @@ export interface ProductsTabProps {
   onUpdate: (id: string, product: Omit<Product, 'id'>) => void;
   onDelete: (id: string) => void;
 }
+
+export interface FavoritesTabProps {
+  favoriteProducts: Product[];
+  loading: boolean;
+}

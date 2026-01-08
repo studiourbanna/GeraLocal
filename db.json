@@ -282,6 +282,26 @@
       },
       "date": "06/01/2026, 14:15:13",
       "status": "pending"
+    },
+    {
+      "id": "4b6e",
+      "userId": "2",
+      "items": [
+        {
+          "id": "1",
+          "name": "Produto Exemplo",
+          "price": 99.9,
+          "quantity": 1
+        }
+      ],
+      "total": 99.9,
+      "address": {
+        "street": "Avenida Campy, 15",
+        "city": "Carapicuíba - SP",
+        "zip": "06384-000"
+      },
+      "date": "08/01/2026, 20:35:26",
+      "status": "pending"
     }
   ]
 }
