@@ -4,7 +4,101 @@
       "theme": "dark",
       "name": "Mamazoe",
       "accessibility": "protanopia",
-      "id": "1"
+      "id": "1",
+      "address": {
+        "street": "Avenida Campy",
+        "number": "15",
+        "city": "Carapicuíba - SP"
+      },
+      "categoryId": "14",
+      "storeIcon": "pets"
+    }
+  ],
+  "storeCategory": [
+    {
+      "id": "1",
+      "name": "Roupas",
+      "storeIcon": "dress"
+    },
+    {
+      "id": "2",
+      "name": "Calçados",
+      "storeIcon": "shoes"
+    },
+    {
+      "id": "3",
+      "name": "Acessórios",
+      "storeIcon": "jewelry"
+    },
+    {
+      "id": "4",
+      "name": "Eletrônicos",
+      "storeIcon": "computer"
+    },
+    {
+      "id": "5",
+      "name": "Casa e Decoração",
+      "storeIcon": "house"
+    },
+    {
+      "id": "6",
+      "name": "Alimentação",
+      "storeIcon": "food"
+    },
+    {
+      "id": "7",
+      "name": "Beleza e Cuidados Pessoais",
+      "storeIcon": "beauty"
+    },
+    {
+      "id": "8",
+      "name": "Esportes e Lazer",
+      "storeIcon": "sports"
+    },
+    {
+      "id": "9",
+      "name": "Brinquedos e Jogos",
+      "storeIcon": "toys"
+    },
+    {
+      "id": "10",
+      "name": "Livros e Papelaria",
+      "storeIcon": "books"
+    },
+    {
+      "id": "11",
+      "name": "Saúde e Bem-Estar",
+      "storeIcon": "health"
+    },
+    {
+      "id": "12",
+      "name": "Automotivo",
+      "storeIcon": "car"
+    },
+    {
+      "id": "13",
+      "name": "Jardinagem e Ferramentas",
+      "storeIcon": "gardening"
+    },
+    {
+      "id": "14",
+      "name": "Pets",
+      "storeIcon": "pets"
+    },
+    {
+      "id": "15",
+      "name": "Moda Infantil",
+      "storeIcon": "kids"
+    },
+    {
+      "id": "16",
+      "name": "Móveis",
+      "storeIcon": "furniture"
+    },
+    {
+      "id": "17",
+      "name": "Tecnologia",
+      "storeIcon": "technology"
     }
   ],
   "products": [

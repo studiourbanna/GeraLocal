@@ -1,17 +1,40 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../contexts/AuthContext';
 import { useTheme } from '../../contexts/ThemeContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { api } from '../../services/api';
+import { StoreCategory } from '../../models/StoreConfig';
 
 const Header: React.FC = () => {
-  const { user, logout } = useAuth(); 
+  const { user, logout } = useAuth();
   const { config, updateConfig } = useTheme();
   const navigate = useNavigate();
 
-  const handleThemeToggle = () => {
+  const [categories, setCategories] = useState<StoreCategory[]>([]);
+
+  useEffect(() => {
+    api.get('storeCategory')
+      .then(res => {
+        const data = Array.isArray(res.data) ? res.data : res;
+        setCategories(data);
+      })
+      .catch(err => {
+        console.error("Erro ao carregar categorias no Header:", err);
+        setCategories([]);
+      });
+  }, []);
+
+  const currentCategory = categories?.find(cat => cat.id === config?.categoryId);
+  const displayIcon = currentCategory?.storeIcon || 'storefront';
+
+  const handleThemeToggle = async () => {
     if (!config) return;
     const newTheme = config.theme === 'light' ? 'dark' : 'light';
-    updateConfig({ theme: newTheme });
+    try {
+      await updateConfig({ ...config, theme: newTheme });
+    } catch (error) {
+      console.error("Erro ao alternar tema:", error);
+    }
   };
 
   const handleLogout = () => {
@@ -20,58 +43,48 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-900 text-black dark:text-white transition-colors sticky top-0 z-50 shadow-md">
-      {/* Logo e Nome da Loja */}
-      <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <span className="material-symbols-outlined text-blue-600 text-3xl">storefront</span>
-        <h1 className="text-xl font-black tracking-tighter uppercase">
-          {config?.name || 'Carregando...'}
-        </h1>
+    <header className="flex justify-between items-center p-4 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md text-black dark:text-white transition-all sticky top-0 z-50 border-b border-gray-100 dark:border-gray-800 shadow-sm">
+      
+      <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity group">
+        <div className="w-10 h-10 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center">
+          <span className="material-symbols-outlined text-blue-600 text-2xl">
+            {displayIcon}
+          </span>
+        </div>
+        <div>
+          <h1 className="text-lg font-black tracking-tighter uppercase leading-none">
+            {config?.name || 'Carregando...'}
+          </h1>
+          <p className="text-[9px] font-bold text-gray-400 tracking-widest uppercase">
+            {currentCategory?.name || 'Painel de Controle'}
+          </p>
+        </div>
       </Link>
 
       <div className="flex items-center gap-3">
-        {/* Toggle de Tema com Material Icons */}
         <button
           onClick={handleThemeToggle}
-          title={`Mudar para tema ${config?.theme === 'light' ? 'escuro' : 'claro'}`}
-          className="p-2 w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 transition-all group"
-          disabled={!config}
+          className="p-2 w-10 h-10 flex items-center justify-center rounded-xl bg-gray-50 dark:bg-gray-800 border border-gray-100 dark:border-gray-700 hover:border-blue-500 transition-all"
         >
-          <span className="material-symbols-outlined text-xl transition-colors group-hover:text-blue-500">
+          <span className="material-symbols-outlined text-xl">
             {config?.theme === 'light' ? 'dark_mode' : 'light_mode'}
           </span>
         </button>
 
         {user ? (
-          <div className="flex items-center gap-4 border-l border-gray-300 dark:border-gray-700 ml-2 pl-4">
-            <div className="hidden md:block text-right">
-              <p className="text-[10px] text-gray-500 uppercase font-bold">Olá,</p>
-              <p className="text-sm font-bold leading-none">{user.name.split(' ')[0]}</p>
+          <div className="flex items-center gap-3 border-l border-gray-200 dark:border-gray-800 ml-2 pl-4">
+            <div className="hidden sm:block text-right">
+              <p className="text-[9px] text-gray-400 uppercase font-black tracking-tighter">Operador</p>
+              <p className="text-xs font-bold leading-none">{user.name?.split(' ')[0]}</p>
             </div>
 
-            {/* Acesso Dinâmico baseado no Role com Ícones */}
-            {user.role === 'admin' ? (
-              <Link
-                to="/dashboard"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-all uppercase"
-              >
-                <span className="material-symbols-outlined text-sm">admin_panel_settings</span>
-                <span className="hidden sm:inline">Admin</span>
-              </Link>
-            ) : (
-              <Link
-                to="/client-dashboard"
-                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-green-600 text-white text-xs font-bold hover:bg-green-700 transition-all uppercase"
-              >
-                <span className="material-symbols-outlined text-sm">person</span>
-                <span className="hidden sm:inline">Meu Painel</span>
-              </Link>
-            )}
+            <Link to="/profile" className="w-9 h-9 bg-indigo-100 dark:bg-indigo-900/50 rounded-full flex items-center justify-center text-indigo-600 dark:text-indigo-400 font-black text-sm border-2 border-transparent hover:border-indigo-500 transition-all">
+              {user.name?.charAt(0).toUpperCase()}
+            </Link>
 
             <button
               onClick={handleLogout}
-              className="p-2 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
-              title="Sair"
+              className="w-9 h-9 flex items-center justify-center rounded-xl text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all"
             >
               <span className="material-symbols-outlined">logout</span>
             </button>
@@ -79,9 +92,8 @@ const Header: React.FC = () => {
         ) : (
           <button
             onClick={() => navigate('/login')}
-            className="flex items-center gap-2 px-5 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 dark:shadow-none"
+            className="px-5 py-2.5 rounded-xl bg-blue-600 text-white text-sm font-black hover:bg-blue-700"
           >
-            <span className="material-symbols-outlined text-lg">login</span>
             Entrar
           </button>
         )}
