@@ -9,36 +9,54 @@ interface LocalConfigState {
 
 const SettingsTab: React.FC = () => {
   const { config, updateConfig } = useTheme();
-  
+
   const [localConfig, setLocalConfig] = useState<LocalConfigState>({
     name: '',
     theme: 'light',
     accessibility: 'normal'
   });
-  
+
   const [isSaving, setIsSaving] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
 
   useEffect(() => {
     if (config) {
-      setLocalConfig({
-        name: config.name || '',
-        // 2. Usamos "as" para garantir que o valor vindo do banco respeite o tipo literal
-        theme: (config.theme as 'light' | 'dark') || 'light',
-        accessibility: (config.accessibility as any) || 'normal'
-      });
+    const root = window.document.documentElement;
+    
+    if (config.theme === 'dark') {
+      root.classList.add('dark');
+    } else {
+      root.classList.remove('dark');
     }
+    
+    root.classList.remove('protanopia', 'deuteranopia', 'tritanopia');
+    if (config.accessibility && config.accessibility !== 'normal') {
+      root.classList.add(config.accessibility);
+    }
+  }
   }, [config]);
 
   const handleSave = async () => {
     setIsSaving(true);
     try {
-      // Agora o localConfig é compatível com Partial<StoreConfig>
+      // 1. Salva no banco de dados (db.json) via ViewModel
       await updateConfig(localConfig);
+
+      // 2. Aplicação visual imediata da acessibilidade
+      const root = window.document.documentElement; // Pega a tag <html>
+
+      // Remove todas as possíveis classes de daltonismo antes de aplicar a nova
+      root.classList.remove('protanopia', 'deuteranopia', 'tritanopia');
+
+      // Se a configuração não for 'normal', aplica a classe correspondente
+      if (localConfig.accessibility !== 'normal') {
+        root.classList.add(localConfig.accessibility);
+      }
+
       setShowSuccess(true);
       setTimeout(() => setShowSuccess(false), 3000);
     } catch (error) {
-      console.error("Erro ao salvar no db.json:", error);
+      console.error("Erro ao salvar configurações:", error);
     } finally {
       setIsSaving(false);
     }
@@ -54,7 +72,7 @@ const SettingsTab: React.FC = () => {
           <label className="block mb-2 font-medium">Nome da Loja</label>
           <input
             type="text"
-            value={localConfig.name} 
+            value={localConfig.name}
             onChange={(e) => setLocalConfig({ ...localConfig, name: e.target.value })}
             className="p-2 border rounded w-full bg-white text-black dark:bg-gray-700 dark:text-white dark:border-gray-600"
           />
@@ -65,8 +83,8 @@ const SettingsTab: React.FC = () => {
             <label className="block mb-2 font-medium">Tema</label>
             <select
               value={localConfig.theme}
-              onChange={(e) => setLocalConfig({ 
-                ...localConfig, 
+              onChange={(e) => setLocalConfig({
+                ...localConfig,
                 theme: e.target.value as 'light' | 'dark'
               })}
               className="p-2 border rounded w-full bg-white text-black dark:bg-gray-700 dark:text-white"
@@ -80,9 +98,9 @@ const SettingsTab: React.FC = () => {
             <label className="block mb-2 font-medium">Acessibilidade</label>
             <select
               value={localConfig.accessibility}
-              onChange={(e) => setLocalConfig({ 
-                ...localConfig, 
-                accessibility: e.target.value as any 
+              onChange={(e) => setLocalConfig({
+                ...localConfig,
+                accessibility: e.target.value as any
               })}
               className="p-2 border rounded w-full bg-white text-black dark:bg-gray-700 dark:text-white"
             >

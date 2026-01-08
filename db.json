@@ -3,7 +3,7 @@
     {
       "theme": "dark",
       "name": "Mamazoe",
-      "accessibility": "normal",
+      "accessibility": "protanopia",
       "id": "1"
     }
   ],
@@ -18,31 +18,31 @@
       "id": "1"
     },
     {
-      "id": "2",
       "name": "Outro Produto",
+      "description": "Descrição de outro produto",
       "price": 149.9,
       "stock": 5,
-      "category": "Geral",
-      "description": "Descrição de outro produto",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "categoryId": "2",
+      "id": "2"
     },
     {
-      "id": "3",
       "name": "Produto Especial",
+      "description": "Descrição do produto especial",
       "price": 199.9,
       "stock": 2,
-      "category": "Geral",
-      "description": "Descrição do produto especial",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "categoryId": "3",
+      "id": "3"
     },
     {
-      "id": "4",
       "name": "Produto Limitado",
+      "description": "Descrição do produto limitado",
       "price": 249.9,
       "stock": 1,
-      "category": "Geral",
-      "description": "Descrição do produto limitado",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "categoryId": "1",
+      "id": "4"
     },
     {
       "id": "f52e",
@@ -74,7 +74,9 @@
       "password": "cliente123",
       "role": "user",
       "name": "Cliente Exemplo",
-      "favorites": [],
+      "favorites": [
+        "1"
+      ],
       "cart": [
         {
           "productId": "1",

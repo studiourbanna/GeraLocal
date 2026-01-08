@@ -4,25 +4,27 @@
 
 @layer base {
   body {
-    @apply antialiased;
+    @apply antialiased transition-colors duration-300;
   }
 }
 
-@layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+/* --- Filtros de Acessibilidade (Daltonismo) --- */
+/* Protanopia: Ausência de receptores vermelhos */
+.protanopia {
+  filter: contrast(110%) brightness(95%) grayscale(10%) sepia(20%) hue-rotate(-15deg);
 }
 
-/* Estilos para daltonismo */
-.colorblind-protanopia {
-  filter: grayscale(50%) sepia(50%);
+/* Deuteranopia: Ausência de receptores verdes (mais comum) */
+.deuteranopia {
+  filter: contrast(105%) brightness(100%) hue-rotate(-20deg) saturate(85%);
 }
 
-.colorblind-deuteranopia {
-  filter: hue-rotate(180deg) saturate(80%);
+/* Tritanopia: Ausência de receptores azuis */
+.tritanopia {
+  filter: contrast(115%) hue-rotate(160deg) saturate(90%);
 }
 
-.colorblind-tritanopia {
-  filter: invert(100%) hue-rotate(180deg);
+/* Utility para remover filtros */
+.accessibility-normal {
+  filter: none !important;
 }
