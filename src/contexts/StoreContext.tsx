@@ -15,10 +15,8 @@ const StoreContext = createContext<StoreContextType | undefined>(undefined);
 export const StoreProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [viewModel] = useState(() => new ProductViewModel());
 
-  // inicializa sempre como array vazio
   const [products, setProducts] = useState<Product[]>([]);
 
-  // carrega produtos do viewModel na montagem
   useEffect(() => {
     const data = viewModel.getProducts();
     setProducts(Array.isArray(data) ? data : []);

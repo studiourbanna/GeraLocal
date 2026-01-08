@@ -1,18 +1,26 @@
 import React, { useState } from 'react';
 import { Product } from '../../models/Product';
 import { validateProduct } from '../../utils/validators';
+import { Category } from '../../models/Category'; // Ajuste o caminho conforme seu projeto
 
 interface ProductsTabProps {
   products: Product[];
+  categories?: Category[]; 
   onAdd: (product: Omit<Product, 'id'>) => void;
   onUpdate: (id: string, product: Omit<Product, 'id'>) => void;
   onDelete: (id: string) => void;
 }
 
-const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, onDelete }) => {
+const ProductsTab: React.FC<ProductsTabProps> = ({ 
+  products, 
+  categories = [],
+  onAdd, 
+  onUpdate, 
+  onDelete 
+}) => {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [errors, setErrors] = useState<string[]>([]);
-  
+
   const initialForm = {
     name: '',
     description: '',
@@ -24,10 +32,14 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
 
   const [form, setForm] = useState<Omit<Product, 'id'>>(initialForm);
 
+  const getCategoryName = (id: string) => {
+    return categories.find(c => c.id === id)?.name || id;
+  };
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const validationErrors = validateProduct(form);
-    
+
     if (validationErrors.length > 0) {
       setErrors(validationErrors);
       return;
@@ -59,65 +71,69 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
 
   return (
     <div className="space-y-8">
-      {/* Formulário de Cadastro/Edição */}
       <section className="bg-gray-50 dark:bg-gray-700/50 p-6 rounded-lg border border-dashed border-gray-300 dark:border-gray-600">
         <h3 className="text-xl font-semibold mb-4 flex items-center gap-2">
-          {editingId ? '✏️ Editar Produto' : '➕ Novo Produto'}
+          <span className="material-symbols-outlined">{editingId ? 'edit' : 'add'}</span>
+          {editingId ? 'Editar Produto' : 'Novo Produto'}
         </h3>
-        
+
         <form onSubmit={handleSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <input
             type="text" placeholder="Nome do Produto"
             value={form.name}
             onChange={(e) => setForm({ ...form, name: e.target.value })}
-            className="p-2 border rounded dark:bg-gray-800" required
+            className="p-2 border rounded dark:bg-gray-800 dark:text-white" required
           />
-          <input
-            type="text" placeholder="Categoria"
+          
+          {/* O Select agora vai funcionar porque 'categories' foi desestruturado lá em cima */}
+          <select
             value={form.categoryId}
             onChange={(e) => setForm({ ...form, categoryId: e.target.value })}
-            className="p-2 border rounded dark:bg-gray-800"
-          />
+            className="p-2 border rounded dark:bg-gray-800 dark:text-white cursor-pointer"
+            required
+          >
+            <option value="" disabled>Selecione uma Categoria</option>
+            {categories.map((cat) => (
+              <option key={cat.id} value={cat.id}>
+                {cat.name}
+              </option>
+            ))}
+          </select>
+
           <input
             type="number" placeholder="Preço"
             value={form.price || ''}
             onChange={(e) => setForm({ ...form, price: parseFloat(e.target.value) })}
-            className="p-2 border rounded dark:bg-gray-800" required step="0.01"
+            className="p-2 border rounded dark:bg-gray-800 dark:text-white" required step="0.01"
           />
           <input
             type="number" placeholder="Estoque"
             value={form.stock || ''}
             onChange={(e) => setForm({ ...form, stock: parseInt(e.target.value) })}
-            className="p-2 border rounded dark:bg-gray-800" required
+            className="p-2 border rounded dark:bg-gray-800 dark:text-white" required
           />
           <input
             type="text" placeholder="URL da Imagem"
             value={form.image}
             onChange={(e) => setForm({ ...form, image: e.target.value })}
-            className="p-2 border rounded dark:bg-gray-800 md:col-span-2"
+            className="p-2 border rounded dark:bg-gray-800 dark:text-white md:col-span-2"
           />
           <textarea
             placeholder="Descrição"
             value={form.description}
             onChange={(e) => setForm({ ...form, description: e.target.value })}
-            className="p-2 border rounded dark:bg-gray-800 md:col-span-2" rows={2}
+            className="p-2 border rounded dark:bg-gray-800 dark:text-white md:col-span-2" rows={2}
           />
 
-          {errors.length > 0 && (
-            <div className="col-span-full text-red-500 text-sm">
-              {errors.map((err, i) => <p key={i}>• {err}</p>)}
-            </div>
-          )}
-
           <div className="col-span-full flex gap-2">
-            <button type="submit" className="bg-green-600 hover:bg-green-700 text-white px-6 py-2 rounded font-bold transition-all">
-              {editingId ? 'Salvar Alterações' : 'Cadastrar Produto'}
+            <button type="submit" className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg font-bold transition-all">
+              {editingId ? 'Salvar Alterações' : 'Cadastrar'}
             </button>
             {editingId && (
-              <button 
-                type="button" 
+              <button
+                type="button"
                 onClick={() => { setEditingId(null); setForm(initialForm); }}
-                className="bg-gray-500 text-white px-6 py-2 rounded"
+                className="bg-gray-500 text-white px-6 py-2 rounded-lg"
               >
                 Cancelar
               </button>
@@ -126,7 +142,7 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
         </form>
       </section>
 
-      {/* Tabela de Listagem */}
+      {/* Tabela */}
       <section>
         <h3 className="text-xl font-semibold mb-4">📋 Estoque Atual</h3>
         <div className="overflow-x-auto rounded-lg border dark:border-gray-700">
@@ -140,21 +156,26 @@ const ProductsTab: React.FC<ProductsTabProps> = ({ products, onAdd, onUpdate, on
               </tr>
             </thead>
             <tbody>
-              {products.length === 0 ? (
-                <tr><td colSpan={4} className="p-10 text-center text-gray-500">Nenhum produto em estoque.</td></tr>
-              ) : (
-                products.map((p) => (
-                  <tr key={p.id} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900/50">
-                    <td className="p-3 font-medium">{p.name} <span className="text-xs text-gray-400 block">{p.categoryId}</span></td>
-                    <td className="p-3 text-right text-green-600 font-semibold">R$ {p.price.toFixed(2)}</td>
-                    <td className="p-3 text-right">{p.stock} un</td>
-                    <td className="p-3 text-center flex justify-center gap-2">
-                      <button onClick={() => handleEditClick(p)} className="text-blue-500 hover:underline">Editar</button>
-                      <button onClick={() => onDelete(p.id)} className="text-red-500 hover:underline">Excluir</button>
-                    </td>
-                  </tr>
-                ))
-              )}
+              {products.map((p) => (
+                <tr key={p.id} className="border-t dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-900/50">
+                  <td className="p-3">
+                    <div className="font-bold dark:text-white">{p.name}</div>
+                    <div className="text-xs text-blue-500 font-medium uppercase">
+                      {getCategoryName(p.categoryId)}
+                    </div>
+                  </td>
+                  <td className="p-3 text-right text-green-600 font-semibold">R$ {p.price.toFixed(2)}</td>
+                  <td className="p-3 text-right dark:text-gray-300">{p.stock} un</td>
+                  <td className="p-3 text-center flex justify-center gap-2">
+                    <button onClick={() => handleEditClick(p)} className="p-2 text-blue-500 hover:bg-blue-50 rounded-full transition-all">
+                       <span className="material-symbols-outlined">edit</span>
+                    </button>
+                    <button onClick={() => onDelete(p.id)} className="p-2 text-red-500 hover:bg-red-50 rounded-full transition-all">
+                       <span className="material-symbols-outlined">delete</span>
+                    </button>
+                  </td>
+                </tr>
+              ))}
             </tbody>
           </table>
         </div>

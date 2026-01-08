@@ -7,7 +7,7 @@ interface AuthContextType {
   viewModel: AuthViewModel;
   login: (email: string, password: string) => Promise<boolean>;
   logout: () => void;
-  isAuthenticated: boolean; // Derivado do user
+  isAuthenticated: boolean;
   toggleFavorite: (productId: string) => Promise<void>;
   addToCart: (productId: string, quantity: number) => Promise<void>;
 }

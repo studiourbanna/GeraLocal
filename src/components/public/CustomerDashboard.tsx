@@ -14,7 +14,6 @@ export const CustomerDashboard: React.FC = () => {
   const [address, setAddress] = useState({ street: '', city: '', zip: '' });
   const [myOrders, setMyOrders] = useState<Order[]>([]);
   
-  // Controle do fluxo do carrinho
   const [checkoutStep, setCheckoutStep] = useState<'cart' | 'address' | 'payment'>('cart');
 
   useEffect(() => {
@@ -22,7 +21,6 @@ export const CustomerDashboard: React.FC = () => {
       if (!user) return;
       try {
         setLoading(true);
-        // Busca produtos e pedidos simultaneamente
         const [productsData, ordersData] = await Promise.all([
           api.get('products'),
           viewModel.getUserOrders()
@@ -78,7 +76,6 @@ export const CustomerDashboard: React.FC = () => {
       alert("🎉 Pedido realizado com sucesso!");
       setCheckoutStep('cart');
       setAddress({ street: '', city: '', zip: '' });
-      // Recarregar pedidos
       const updatedOrders = await viewModel.getUserOrders();
       setMyOrders(updatedOrders.sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()));
     } else {

@@ -4,7 +4,7 @@ import { useAuth } from '../../contexts/AuthContext';
 
 interface PrivateRouteProps {
   children: JSX.Element;
-  role?: 'admin' | 'user'; // Define quais papéis são aceitos
+  role?: 'admin' | 'user';
 }
 
 const PrivateRoute: React.FC<PrivateRouteProps> = ({ children, role }) => {

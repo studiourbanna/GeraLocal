@@ -3,19 +3,22 @@ import { useAuth } from '../../contexts/AuthContext';
 import ProductsTab from './ProductsTab';
 import SettingsTab from './SettingsTab';
 import { Product } from '../../models/Product';
-import { api } from '../../services/api'; // Certifique-se de importar sua api
+import { Category } from '../../models/Category';
+import { api } from '../../services/api';
 
 const Dashboard: React.FC = () => {
   const { viewModel } = useAuth();
   const [activeTab, setActiveTab] = useState<'products' | 'settings'>('products');
   const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
 
-  // CARREGAR: Busca do db.json via API
   useEffect(() => {
     const loadProducts = async () => {
       try {
         const data = await api.get('products');
+        const categoriesData = await api.get('categories');
         setProducts(data);
+        setCategories(categoriesData);
       } catch (error) {
         console.error('Erro ao carregar produtos do servidor:', error);
       }
@@ -25,7 +28,6 @@ const Dashboard: React.FC = () => {
 
   const addProduct = async (newProductData: Omit<Product, 'id'>) => {
     try {
-      // O JSON Server gera o ID automaticamente se você não enviar um
       const savedProduct = await api.post('products', newProductData);
       setProducts([...products, savedProduct]);
     } catch (error) {
@@ -57,21 +59,28 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="p-8 bg-gray-100 dark:bg-gray-900 min-h-screen text-black dark:text-white">
-      <h2 className="text-2xl font-bold mb-6">⚙️ Painel Administrativo</h2>
+      <h2 className="text-2xl font-bold mb-6">
+        <span className="material-symbols-outlined">
+          settings
+        </span> Painel Administrativo</h2>
       <div className="flex space-x-4 mb-6">
         <button
           onClick={() => setActiveTab('products')}
           className={`px-4 py-2 rounded-lg font-medium transition-colors 
             ${activeTab === 'products' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-800'}`}
         >
-          📦 Gerenciar Estoque
+          <span className="material-symbols-outlined">
+            package_2
+          </span> Gerenciar Estoque
         </button>
         <button
           onClick={() => setActiveTab('settings')}
-          className={`px-4 py-2 rounded-lg font-medium transition-colors 
+          className={`px-4 py-2 rounded-lg font-small transition-colors 
             ${activeTab === 'settings' ? 'bg-blue-600 text-white' : 'bg-gray-200 dark:bg-gray-800'}`}
         >
-          ⚙️ Configurações
+          <span className="material-symbols-outlined">
+            settings
+          </span> Configurações
         </button>
       </div>
 
@@ -79,6 +88,7 @@ const Dashboard: React.FC = () => {
         {activeTab === 'products' && (
           <ProductsTab
             products={products}
+            categories={categories}
             onAdd={addProduct}
             onUpdate={updateProduct}
             onDelete={deleteProduct}

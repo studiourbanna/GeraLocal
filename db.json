@@ -9,13 +9,13 @@
   ],
   "products": [
     {
-      "id": "1",
       "name": "Produto Exemplo",
+      "description": "Descrição do produto exemplo",
       "price": 99.9,
       "stock": 10,
-      "category": "Geral",
-      "description": "Descrição do produto exemplo",
-      "image": "https://via.placeholder.com/150"
+      "image": "https://via.placeholder.com/150",
+      "categoryId": "1",
+      "id": "1"
     },
     {
       "id": "2",
@@ -43,6 +43,15 @@
       "category": "Geral",
       "description": "Descrição do produto limitado",
       "image": "https://via.placeholder.com/150"
+    },
+    {
+      "id": "f52e",
+      "name": "Ração",
+      "description": "Uma ração nutritiva para o pet",
+      "price": 150,
+      "stock": 10,
+      "image": "",
+      "categoryId": "Alimentação"
     }
   ],
   "users": [
@@ -65,10 +74,13 @@
       "password": "cliente123",
       "role": "user",
       "name": "Cliente Exemplo",
-      "favorites": [
-        "1"
-      ],
-      "cart": []
+      "favorites": [],
+      "cart": [
+        {
+          "productId": "1",
+          "quantity": 1
+        }
+      ]
     },
     {
       "id": "3",
@@ -133,6 +145,46 @@
         "zip": "06384000"
       },
       "date": "06/01/2026, 14:01:35",
+      "status": "pending"
+    },
+    {
+      "id": "412e",
+      "userId": "2",
+      "items": [
+        {
+          "id": "1",
+          "name": "Produto Exemplo",
+          "price": 99.9,
+          "quantity": 1
+        }
+      ],
+      "total": 99.9,
+      "address": {
+        "street": "Avenida Campy, 15",
+        "city": "Carapicuiba",
+        "zip": "06384000"
+      },
+      "date": "06/01/2026, 14:05:03",
+      "status": "pending"
+    },
+    {
+      "id": "851b",
+      "userId": "2",
+      "items": [
+        {
+          "id": "f52e",
+          "name": "Ração",
+          "price": 150,
+          "quantity": 1
+        }
+      ],
+      "total": 150,
+      "address": {
+        "street": "Rua Alguma Coisa",
+        "city": "Caraguatatuba",
+        "zip": "0800760"
+      },
+      "date": "06/01/2026, 14:15:13",
       "status": "pending"
     }
   ]

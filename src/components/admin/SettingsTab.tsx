@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useTheme } from '../../contexts/ThemeContext';
 
-// Definição local para garantir a compatibilidade
 interface LocalConfigState {
   name: string;
   theme: 'light' | 'dark';
@@ -11,7 +10,6 @@ interface LocalConfigState {
 const SettingsTab: React.FC = () => {
   const { config, updateConfig } = useTheme();
   
-  // 1. Tipamos explicitamente o useState para não ser apenas "string"
   const [localConfig, setLocalConfig] = useState<LocalConfigState>({
     name: '',
     theme: 'light',
@@ -69,7 +67,7 @@ const SettingsTab: React.FC = () => {
               value={localConfig.theme}
               onChange={(e) => setLocalConfig({ 
                 ...localConfig, 
-                theme: e.target.value as 'light' | 'dark' // Cast necessário aqui também
+                theme: e.target.value as 'light' | 'dark'
               })}
               className="p-2 border rounded w-full bg-white text-black dark:bg-gray-700 dark:text-white"
             >

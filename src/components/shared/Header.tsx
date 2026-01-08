@@ -20,64 +20,68 @@ const Header: React.FC = () => {
   };
 
   return (
-    <header className="flex justify-between items-center p-4 bg-gray-200 dark:bg-gray-800 text-black dark:text-white transition-colors sticky top-0 z-50 shadow-sm">
-      {/* Nome da Loja: Agora lê o objeto 'config' limpo pela ViewModel */}
+    <header className="flex justify-between items-center p-4 bg-gray-100 dark:bg-gray-900 text-black dark:text-white transition-colors sticky top-0 z-50 shadow-md">
+      {/* Logo e Nome da Loja */}
       <Link to="/" className="flex items-center gap-2 hover:opacity-80 transition-opacity">
-        <div className="flex items-center gap-2">
-          <span className="text-2xl" role="img" aria-label="store">🏬</span>
-          <h1 className="text-xl font-bold tracking-tight">
-            {config?.name || 'Carregando...'}
-          </h1>
-        </div>
+        <span className="material-symbols-outlined text-blue-600 text-3xl">storefront</span>
+        <h1 className="text-xl font-black tracking-tighter uppercase">
+          {config?.name || 'Carregando...'}
+        </h1>
       </Link>
 
-      <div className="flex items-center gap-4">
-        {/* Toggle de Tema */}
+      <div className="flex items-center gap-3">
+        {/* Toggle de Tema com Material Icons */}
         <button
           onClick={handleThemeToggle}
           title={`Mudar para tema ${config?.theme === 'light' ? 'escuro' : 'claro'}`}
-          className="p-2 w-10 h-10 flex items-center justify-center rounded-full bg-gray-300 dark:bg-gray-700 hover:ring-2 hover:ring-blue-400 transition-all"
+          className="p-2 w-10 h-10 flex items-center justify-center rounded-full bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:border-blue-500 transition-all group"
           disabled={!config}
         >
-          {config?.theme === 'light' ? '🌞' : '🌙'}
+          <span className="material-symbols-outlined text-xl transition-colors group-hover:text-blue-500">
+            {config?.theme === 'light' ? 'dark_mode' : 'light_mode'}
+          </span>
         </button>
 
         {user ? (
-          <div className="flex items-center gap-4 border-l border-gray-400 dark:border-gray-600 pl-4">
-            <div className="hidden sm:block text-right">
-              <p className="text-xs text-gray-500 dark:text-gray-400">Olá,</p>
-              <p className="text-sm font-bold leading-none">{user.name}</p>
+          <div className="flex items-center gap-4 border-l border-gray-300 dark:border-gray-700 ml-2 pl-4">
+            <div className="hidden md:block text-right">
+              <p className="text-[10px] text-gray-500 uppercase font-bold">Olá,</p>
+              <p className="text-sm font-bold leading-none">{user.name.split(' ')[0]}</p>
             </div>
 
-            {/* Acesso Dinâmico baseado no Role */}
+            {/* Acesso Dinâmico baseado no Role com Ícones */}
             {user.role === 'admin' ? (
               <Link
                 to="/dashboard"
-                className="px-3 py-1.5 rounded-md bg-indigo-600 text-white text-sm font-medium hover:bg-indigo-700 transition-colors shadow-sm"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-indigo-600 text-white text-xs font-bold hover:bg-indigo-700 transition-all uppercase"
               >
-                Painel Admin
+                <span className="material-symbols-outlined text-sm">admin_panel_settings</span>
+                <span className="hidden sm:inline">Admin</span>
               </Link>
             ) : (
               <Link
                 to="/client-dashboard"
-                className="px-3 py-1.5 rounded-md bg-green-600 text-white text-sm font-medium hover:bg-green-700 transition-colors shadow-sm"
+                className="flex items-center gap-2 px-3 py-2 rounded-lg bg-green-600 text-white text-xs font-bold hover:bg-green-700 transition-all uppercase"
               >
-                Meu Painel
+                <span className="material-symbols-outlined text-sm">person</span>
+                <span className="hidden sm:inline">Meu Painel</span>
               </Link>
             )}
 
             <button
               onClick={handleLogout}
-              className="text-sm font-medium text-red-600 dark:text-red-400 hover:underline"
+              className="p-2 flex items-center justify-center rounded-lg text-red-500 hover:bg-red-50 dark:hover:bg-red-900/20 transition-colors"
+              title="Sair"
             >
-              Sair
+              <span className="material-symbols-outlined">logout</span>
             </button>
           </div>
         ) : (
           <button
             onClick={() => navigate('/login')}
-            className="px-5 py-2 rounded-lg bg-blue-600 text-white font-semibold hover:bg-blue-700 dark:bg-yellow-500 dark:text-black transition-all"
+            className="flex items-center gap-2 px-5 py-2 rounded-lg bg-blue-600 text-white font-bold hover:bg-blue-700 transition-all shadow-lg shadow-blue-200 dark:shadow-none"
           >
+            <span className="material-symbols-outlined text-lg">login</span>
             Entrar
           </button>
         )}
