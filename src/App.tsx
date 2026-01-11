@@ -27,29 +27,38 @@ function App() {
       <AuthProvider>
         <StoreProvider>
           <BrowserRouter>
+            {/* O Header fica fixo no topo */}
             <Header />
-            <Routes>
-              <Route path="/" element={<LandingPage />} />
-              <Route path="/login" element={<LoginPage />} />
-              <Route path="/passwordless" element={<PasswordlessLogin />} />
-              {/* ✅ rota protegida */}
-              <Route
-                path="/dashboard"
-                element={
-                  <PrivateRoute role="admin">
-                    <AdminDashboard />
-                  </PrivateRoute>
-                }
-              />
-              <Route
-                path="/profile"
-                element={
-                  <PrivateRoute role="user">
-                    <UserDashboard />
-                  </PrivateRoute>
-                }
-              />
-            </Routes>
+
+            {/* O main ajuda a empurrar o footer para baixo em telas com pouco conteúdo */}
+            <main className="min-h-screen">
+              <Routes>
+                <Route path="/" element={<LandingPage />} />
+                <Route path="/login" element={<LoginPage />} />
+                <Route path="/passwordless" element={<PasswordlessLogin />} />
+                
+                {/* ✅ Rotas Protegidas */}
+                <Route
+                  path="/dashboard"
+                  element={
+                    <PrivateRoute role="admin">
+                      <AdminDashboard />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/profile"
+                  element={
+                    <PrivateRoute role="user">
+                      <UserDashboard />
+                    </PrivateRoute>
+                  }
+                />
+              </Routes>
+            </main>
+
+            {/* ✅ O Footer agora é renderizado em todas as rotas */}
+            <Footer />
           </BrowserRouter>
         </StoreProvider>
       </AuthProvider>
