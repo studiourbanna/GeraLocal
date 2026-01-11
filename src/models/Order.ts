@@ -1,24 +1,21 @@
-export interface OrderItem {
-  id: string;
-  name: string;
-  price: number;
-  quantity: number;
+import { Address, Entity, BaseItem } from './Base';
+
+export interface OrderStatus extends Entity {
+  status: 'pending' | 'preparing' | 'shipped' | 'delivered' | 'cancelled' | string;
 }
 
-export interface Order {
-  id: string;
+// OrderItem agora estende BaseItem (reutilização)
+export interface OrderItem extends BaseItem {}
+
+export interface Order extends Entity {
   userId: string;
   items: OrderItem[];
   total: number;
-  address: {
-    street: string;
-    city: string;
-    zip: string;
-  };
+  address: Address; // Agora usa o padrão global
   date: string;
-  status: 'pending' | 'paid' | 'shipped' | 'delivered' | 'cancelled';
+  status: OrderStatus[];
 }
 
-export interface OrdersTabProps {
+export interface OrdersTabProps extends Entity {
   myOrders: Order[];
 }

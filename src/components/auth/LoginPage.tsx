@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { validateEmail, validatePassword } from '../../utils/validators';
+import { useAuth } from '@/contexts/AuthContext';
+import { validateEmail, validatePassword } from '@/utils/validators';
 import { useNavigate } from 'react-router-dom';
 
 const LoginPage: React.FC = () => {

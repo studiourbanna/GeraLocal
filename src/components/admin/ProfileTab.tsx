@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { useTheme } from '../../contexts/ThemeContext';
-import { api } from '../../services/api';
+import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
+import { api } from '@/services/api';
 
 const ProfileTab: React.FC = () => {
   const { user, login } = useAuth();

@@ -1,5 +1,5 @@
 import React from 'react';
-import { FavoritesTabProps } from '../../models/Product';
+import { FavoritesTabProps } from '@/models/Favorite';
 import ProductCard from '../public/ProductCard';
 
 const FavoritesTab: React.FC<FavoritesTabProps> = ({ favoriteProducts, loading }) => {

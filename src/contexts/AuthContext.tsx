@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useCallback } from 'react';
-import { AuthViewModel } from '../viewmodels/AuthViewModel';
-import { User } from '../models/User';
+import { AuthViewModel } from '@/viewmodels/AuthViewModel';
+import { User } from '@/models/User';
 
 interface AuthContextType {
   user: User | null;

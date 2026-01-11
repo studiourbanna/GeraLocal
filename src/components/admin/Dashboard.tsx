@@ -1,19 +1,35 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
+
+// Importação dos Models refatorados
+import { Product, ProductCategory } from '@/models/Product';
+import { TabType } from '@/models/Base';
+
+// Importação da API e Contexto
+import { api } from '@/services/api';
+import { useAuth } from '@/contexts/AuthContext';
+
+// Importação das abas
 import ProductsTab from './ProductsTab';
 import SettingsTab from './SettingsTab';
 import OrdersTab from './OrdersTab';
 import ProfileTab from './ProfileTab';
-import { Product, Category } from '../../models/Product';
-import { api } from '../../services/api';
 
-type TabType = 'products' | 'settings' | 'orders' | 'profile';
+const AdminDashboard: React.FC = () => {
+  const { user } = useAuth();
+  
+  // Definição das instâncias de TabType seguindo a nova interface
+  const adminTabs: TabType[] = [
+    { id: 'orders', name: 'Pedidos' },
+    { id: 'products', name: 'Estoque' },
+    { id: 'settings', name: 'Loja' },
+    { id: 'profile', name: 'Perfil' },
+  ];
 
-const Dashboard: React.FC = () => {
-  const { user, viewModel } = useAuth();
-  const [activeTab, setActiveTab] = useState<TabType>('products');
+  // O estado agora guarda o ID (string) da aba ativa
+  const [activeTabId, setActiveTabId] = useState<string>(adminTabs[0].id);
+  
   const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<ProductCategory[]>([]);
 
   useEffect(() => {
     const loadData = async () => {
@@ -31,83 +47,87 @@ const Dashboard: React.FC = () => {
     loadData();
   }, []);
 
-  const addProduct = async (newProductData: Omit<Product, 'id'>) => {
-    try {
-      const savedProduct = await api.post('products', newProductData);
-      setProducts([...products, savedProduct]);
-    } catch (error) { console.error(error); }
+  // --- Handlers de Produto (Mantidos com lógica de prev state) ---
+  const handleAddProduct = async (data: Omit<Product, 'id'>) => {
+    const res = await api.post('products', data);
+    setProducts(prev => [...prev, res]);
   };
 
-  const updateProduct = async (id: string, updatedData: Omit<Product, 'id'>) => {
-    try {
-      const updatedProduct = await api.put(`products/${id}`, updatedData);
-      setProducts(products.map(p => p.id === id ? updatedProduct : p));
-    } catch (error) { console.error(error); }
+  const handleUpdateProduct = async (id: string, data: Omit<Product, 'id'>) => {
+    const res = await api.put(`products/${id}`, data);
+    setProducts(prev => prev.map(p => p.id === id ? res : p));
   };
 
-  const deleteProduct = async (id: string) => {
-    if (window.confirm('Excluir produto?')) {
-      try {
-        await api.delete('products', id);
-        setProducts(products.filter(p => p.id !== id));
-      } catch (error) { console.error(error); }
-    }
+  const handleDeleteProduct = async (id: string) => {
+    await api.delete('products', id);
+    setProducts(prev => prev.filter(p => p.id !== id));
   };
 
-  if (!viewModel.isLoggedIn) return null;
+  if (!user || user.role !== 'admin') return null;
 
   return (
-    <div className="p-8 bg-gray-100 dark:bg-gray-900 min-h-screen text-black dark:text-white transition-colors">
-      <header className="flex justify-between items-center mb-8">
-        <h2 className="text-3xl font-black flex items-center gap-3">
-          <span className="material-symbols-outlined text-4xl text-blue-600">dashboard</span> 
-          PAINEL ADMIN
-        </h2>
-        <div className="flex items-center gap-2 bg-blue-100 dark:bg-blue-900/30 px-4 py-2 rounded-full">
-          <span className="material-symbols-outlined text-blue-600">person</span>
-          <span className="text-sm font-bold uppercase">{user?.name}</span>
+    <div className="min-h-screen bg-[#F8FAFC] dark:bg-[#0B0F1A] pb-20 transition-colors">
+      
+      {/* HEADER */}
+      <header className="bg-white dark:bg-gray-900 border-b border-gray-100 dark:border-gray-800 p-4">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <h2 className="text-xl font-black dark:text-white uppercase tracking-tighter flex items-center gap-2">
+            <span className="material-symbols-outlined text-blue-600">shield_person</span>
+            Admin Console
+          </h2>
+          <span className="text-[10px] font-black bg-blue-50 dark:bg-blue-900/30 text-blue-600 px-3 py-1 rounded-full uppercase">
+            {user.name}
+          </span>
         </div>
       </header>
 
-      {/* --- MENU DE NAVEGAÇÃO --- */}
-      <div className="flex flex-wrap gap-3 mb-8">
-        {[
-          { id: 'orders', label: 'Pedidos', icon: 'receipt_long' },
-          { id: 'products', label: 'Estoque', icon: 'inventory_2' },
-          { id: 'settings', label: 'Loja', icon: 'settings' },
-          { id: 'profile', label: 'Meu Perfil', icon: 'account_circle' },
-        ].map((tab) => (
-          <button
-            key={tab.id}
-            onClick={() => setActiveTab(tab.id as TabType)}
-            className={`flex items-center gap-2 px-6 py-3 rounded-xl font-bold transition-all shadow-sm
-              ${activeTab === tab.id 
-                ? 'bg-blue-600 text-white scale-105 shadow-blue-200 dark:shadow-none' 
-                : 'bg-white dark:bg-gray-800 text-gray-500 hover:bg-gray-200 dark:hover:bg-gray-700'}`}
-          >
-            <span className="material-symbols-outlined">{tab.icon}</span>
-            {tab.label}
-          </button>
-        ))}
-      </div>
+      <main className="max-w-7xl mx-auto px-6 pt-8">
+        
+        {/* NAVEGAÇÃO USANDO A INTERFACE TabType */}
+        <nav className="flex flex-wrap gap-2 mb-8 p-1.5 bg-gray-100 dark:bg-gray-900/50 w-fit rounded-2xl border dark:border-gray-800">
+          {adminTabs.map((tab) => (
+            <button
+              key={tab.id}
+              onClick={() => setActiveTabId(tab.id)}
+              className={`flex items-center gap-2 px-6 py-2.5 rounded-xl text-xs font-black uppercase tracking-widest transition-all ${
+                activeTabId === tab.id 
+                  ? 'bg-white dark:bg-gray-800 text-blue-600 shadow-sm' 
+                  : 'text-gray-400 hover:text-gray-600'
+              }`}
+            >
+              {/* Ícone dinâmico baseado no ID da aba */}
+              <span className="material-symbols-outlined text-lg">
+                {tab.id === 'orders' ? 'receipt_long' : 
+                 tab.id === 'products' ? 'inventory_2' : 
+                 tab.id === 'settings' ? 'settings' : 'account_circle'}
+              </span>
+              {tab.name} {/* Usando a propriedade 'name' do TabType */}
+            </button>
+          ))}
+        </nav>
 
-      {/* --- CONTEÚDO DINÂMICO --- */}
-      <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl shadow-xl border border-gray-200 dark:border-gray-700">
-        {activeTab === 'orders' && <OrdersTab />}
-        {activeTab === 'products' && (
-          <ProductsTab
-            products={products}
-            categories={categories}
-            onAdd={addProduct}
-            onUpdate={updateProduct}
-            onDelete={deleteProduct}
-          />
-        )}
-        {activeTab === 'settings' && <SettingsTab />}
-        {activeTab === 'profile' && <ProfileTab />}
-      </div>
+        {/* ÁREA DE CONTEÚDO (Switch pelo ID) */}
+        <div className="animate-in fade-in slide-in-from-bottom-2 duration-400">
+          {activeTabId === 'orders' && <OrdersTab />}
+          
+          {activeTabId === 'products' && (
+            <ProductsTab
+              id="tab-products-admin"
+              products={products}
+              categories={categories}
+              onAdd={handleAddProduct}
+              onUpdate={handleUpdateProduct}
+              onDelete={handleDeleteProduct}
+            />
+          )}
+
+          {activeTabId === 'settings' && <SettingsTab />}
+          
+          {activeTabId === 'profile' && <ProfileTab />}
+        </div>
+      </main>
     </div>
   );
 };
 
-export default Dashboard;
+export default AdminDashboard;

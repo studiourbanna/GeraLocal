@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { useTheme } from '../../contexts/ThemeContext';
+import { useAuth } from '@/contexts/AuthContext';
+import { useTheme } from '@/contexts/ThemeContext';
 import { useNavigate, Link } from 'react-router-dom';
-import { api } from '../../services/api';
-import { StoreCategory } from '../../models/StoreConfig';
+import { api } from '@/services/api';
+import { StoreCategory } from '@/models/Store';
 
 const Header: React.FC = () => {
   const { user, logout } = useAuth();

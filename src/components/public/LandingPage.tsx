@@ -1,13 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import ProductCard from './ProductCard';
 import { useLocation } from 'react-router-dom';
-import { Product } from '../../models/Product';
-import { api } from '../../services/api';
-import { Category } from '../../models/Category';
+import { Product, ProductCategory } from '@/models/Product';
+import { api } from '@/services/api';
+import ProductCard from './ProductCard';
 
 const LandingPage: React.FC = () => {
   const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<Category[]>([]);
+  const [categories, setCategories] = useState<ProductCategory[]>([]);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [loading, setLoading] = useState(true);
 

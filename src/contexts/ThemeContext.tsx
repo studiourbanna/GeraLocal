@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { StoreConfig } from '../models/StoreConfig';
-import { StoreViewModel } from '../viewmodels/StoreViewModel';
+import { StoreConfig } from '@/models/Store';
+import { StoreViewModel } from '@/viewmodels/StoreViewModel';
 
 interface ThemeContextType {
   config: StoreConfig | null;

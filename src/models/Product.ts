@@ -1,5 +1,6 @@
-export interface Product {
-  id: string;
+import { Entity } from './Base';
+
+export interface Product extends Entity {
   name: string;
   description: string;
   price: number;
@@ -8,20 +9,18 @@ export interface Product {
   categoryId: string;
 }
 
-export interface Category {
-  id: string;
+export interface ProductCategory extends Entity {
   name: string;
 }
 
-export interface ProductsTabProps {
+export interface ProductsTabProps extends Entity {
   products: Product[];
-  categories?: Category[]; 
+  categories: ProductCategory[];
   onAdd: (product: Omit<Product, 'id'>) => void;
   onUpdate: (id: string, product: Omit<Product, 'id'>) => void;
   onDelete: (id: string) => void;
 }
 
-export interface FavoritesTabProps {
-  favoriteProducts: Product[];
-  loading: boolean;
+export interface ProductCardProps {
+  product: Product;
 }

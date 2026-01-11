@@ -1,10 +1,9 @@
-import { Product } from '../models/Product';
-import { Category } from '../models/Category';
-import { api } from '../services/api';
+import { Product, ProductCategory } from '@/models/Product';
+import { api } from '@/services/api';
 
 export class ProductViewModel {
   private products: Product[] = [];
-  private categories: Category[] = [];
+  private categories: ProductCategory[] = [];
 
   async getProducts(): Promise<Product[]> {
     const data = await api.get('products');
@@ -12,7 +11,7 @@ export class ProductViewModel {
     return this.products;
   }
 
-  async getCategories(): Promise<Category[]> {
+  async getCategories(): Promise<ProductCategory[]> {
     const data = await api.get('categories');
     this.categories = Array.isArray(data) ? data : [];
     return this.categories;

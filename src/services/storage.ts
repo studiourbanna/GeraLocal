@@ -1,5 +1,5 @@
-import { Product } from '../models/Product';
-import { StoreConfig } from '../models/StoreConfig';
+import { Product } from '@/models/Product';
+import { StoreConfig } from '@/models/Store';
 import { api } from './api';
 
 export const storageService = {

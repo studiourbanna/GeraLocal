@@ -1,7 +1,7 @@
-import { User } from '../models/User';
-import { Order } from '../models/Order';
-import { authService } from '../services/auth';
-import { api } from '../services/api';
+import { User } from '@/models/User';
+import { Order } from '@/models/Order';
+import { authService } from '@/services/auth';
+import { api } from '@/services/api';
 
 export class AuthViewModel {
   private user: User | null = null;
@@ -106,6 +106,22 @@ export class AuthViewModel {
     } catch (error) {
       console.warn("Rota de pedidos não encontrada ou vazia. Retornando [].");
       return []; // Retorna vazio em vez de estourar um erro no console
+    }
+  }
+
+  async updateUser(userId: string, updatedData: Partial<User>): Promise<boolean> {
+    try {
+      const response = await api.put(`users/${userId}`, {
+        ...this.user,
+        ...updatedData
+      });
+      
+      await this.persistUser(response);
+      return true;
+    }
+    catch (error) {
+      console.error("Erro ao atualizar usuário:", error);
+      return false;
     }
   }
 

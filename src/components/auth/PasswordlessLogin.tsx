@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { useAuth } from '../../contexts/AuthContext';
-import { validateEmail } from '../../utils/validators';
+import { useAuth } from '@/contexts/AuthContext';
+import { validateEmail } from '@/utils/validators';
 import { useNavigate } from 'react-router-dom';
 
 const PasswordlessLogin: React.FC = () => {

@@ -1,6 +1,7 @@
 export interface CepResponse {
   street: string;
   city: string;
+  state: string;
   error?: string;
 }
 
@@ -12,7 +13,7 @@ export const fetchAddressByCep = async (cep: string): Promise<CepResponse> => {
   const cleanCep = cep.replace(/\D/g, '');
 
   if (cleanCep.length !== 8) {
-    return { street: '', city: '', error: 'CEP Inválido' };
+    return { street: '', city: '', state: '', error: 'CEP Inválido' };
   }
 
   try {
@@ -20,15 +21,16 @@ export const fetchAddressByCep = async (cep: string): Promise<CepResponse> => {
     const data = await response.json();
 
     if (data.erro) {
-      return { street: '', city: '', error: 'CEP não encontrado' };
+      return { street: '', city: '', state: '', error: 'CEP não encontrado' };
     }
 
     return {
       street: data.logradouro,
-      city: `${data.localidade} - ${data.uf}`,
+      city: `${data.localidade}`,
+      state: `${data.uf}`,
     };
   } catch (error) {
-    return { street: '', city: '', error: 'Erro ao conectar ao serviço de CEP' };
+    return { street: '', city: '', state: '', error: 'Erro ao conectar ao serviço de CEP' };
   }
 };
 

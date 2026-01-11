@@ -1,15 +1,11 @@
 import React from 'react';
-import { Product } from '../../models/Product';
-import { useAuth } from '../../contexts/AuthContext';
-import { useNavigate } from 'react-router-dom'; // 1. Importar o hook de navegação
-
-interface ProductCardProps {
-  product: Product;
-}
+import { useNavigate } from 'react-router-dom';
+import { ProductCardProps } from '@/models/Product';
+import { useAuth } from '@/contexts/AuthContext';
 
 const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   const { user, toggleFavorite, addToCart } = useAuth();
-  const navigate = useNavigate(); // 2. Inicializar o navigate
+  const navigate = useNavigate();
   
   const isAdmin = user?.role === 'admin';
   const isCustomer = !isAdmin;
@@ -22,7 +18,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     if (user) {
       toggleFavorite(product.id);
     } else {
-      // 3. Redirecionar se não estiver logado
       navigate('/login'); 
     }
   };
@@ -31,7 +26,6 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     e.preventDefault();
     
     if (!user) {
-      // 4. Redirecionar se não estiver logado
       navigate('/login');
       return;
     }

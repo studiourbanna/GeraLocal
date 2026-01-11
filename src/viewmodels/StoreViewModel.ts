@@ -1,5 +1,5 @@
-import { StoreConfig } from '../models/StoreConfig';
-import { api } from '../services/api';
+import { StoreConfig } from '@/models/Store';
+import { api } from '@/services/api';
 
 export class StoreViewModel {
   private config: StoreConfig | null = null;

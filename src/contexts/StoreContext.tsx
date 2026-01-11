@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { Product } from '../models/Product';
-import { ProductViewModel } from '../viewmodels/ProductViewModel';
+import { Product } from '@/models/Product';
+import { ProductViewModel } from '@/viewmodels/ProductViewModel';
 
 interface StoreContextType {
   viewModel: ProductViewModel;
