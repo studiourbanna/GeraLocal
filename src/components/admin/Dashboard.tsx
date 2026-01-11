@@ -123,7 +123,12 @@ const AdminDashboard: React.FC = () => {
 
           {activeTabId === 'settings' && <SettingsTab />}
           
-          {activeTabId === 'profile' && <ProfileTab />}
+          {activeTabId === 'profile' && (
+            <ProfileTab
+              id="tab-profile-user"
+              user={user}
+            />
+          )}
         </div>
       </main>
     </div>
