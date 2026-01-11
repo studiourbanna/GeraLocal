@@ -9,3 +9,8 @@ export interface User extends Entity {
   favorites: string[]; // IDs dos produtos
   cart: { productId: string; quantity: number }[];
 }
+
+export interface ProfileTabProps extends Entity {
+  id: string;
+  user: User | null; // Aceita null para bater com o Contexto
+}

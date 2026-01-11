@@ -173,7 +173,12 @@ export const UserDashboard: React.FC = () => {
 
       <main className="max-w-6xl mx-auto p-4 md:p-8">
         <div className="animate-in fade-in slide-in-from-bottom-2 duration-300">
-          {activeTabId === 'profile' && <ProfileTab />}
+          {activeTabId === 'profile' && (
+            <ProfileTab
+              id="tab-profile-user"
+              user={user}
+            />
+          )}
 
           {activeTabId === 'favorites' && (
             <FavoritesTab
