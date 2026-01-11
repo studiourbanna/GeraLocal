@@ -10,13 +10,13 @@ interface AuthContextType {
   isAuthenticated: boolean;
   toggleFavorite: (productId: string) => Promise<void>;
   addToCart: (productId: string, quantity: number) => Promise<void>;
+  updateUserLocally: (newData: User) => void;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
 
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [viewModel] = useState(() => new AuthViewModel());
-  
   const [user, setUser] = useState<User | null>(() => viewModel.currentUser);
 
   const sync = useCallback(() => {
@@ -37,24 +37,33 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
 
   const toggleFavorite = async (productId: string) => {
     await viewModel.toggleFavorite(productId);
-    sync(); 
+    sync();
   };
 
   const addToCart = async (productId: string, quantity: number) => {
     await viewModel.updateCart(productId, quantity);
-    sync(); 
+    sync();
   };
 
+  // ✅ Função implementada
+  const updateUserLocally = useCallback((newData: User) => {
+    setUser(newData);
+    // Também atualizamos no ViewModel para manter a persistência consistente
+    viewModel.currentUser = newData;
+    localStorage.setItem('@App:user', JSON.stringify(newData));
+  }, [viewModel]);
+
   return (
-    <AuthContext.Provider 
-      value={{ 
-        user, 
-        viewModel, 
-        login, 
+    <AuthContext.Provider
+      value={{
+        user,
+        viewModel,
+        login,
         logout,
-        isAuthenticated: !!user, 
+        isAuthenticated: !!user,
         toggleFavorite,
-        addToCart
+        addToCart,
+        updateUserLocally // Agora o TS para de reclamar aqui
       }}
     >
       {children}

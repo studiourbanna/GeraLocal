@@ -10,30 +10,42 @@ export class AuthViewModel {
     this.user = authService.getCurrentUser();
   }
 
+  // ✅ Getter para leitura
   get currentUser(): User | null {
     return this.user;
+  }
+
+  // ✅ Setter para escrita (Permite: viewModel.currentUser = novoUsuario)
+  set currentUser(updatedUser: User | null) {
+    this.user = updatedUser;
+    if (updatedUser) {
+      // Sincroniza com o armazenamento persistente
+      localStorage.setItem('@App:user', JSON.stringify(updatedUser));
+    } else {
+      localStorage.removeItem('@App:user');
+    }
   }
 
   async login(email: string, password: string): Promise<boolean> {
     try {
       const loggedUser = await authService.login(email, password);
-      this.user = loggedUser;
+      this.currentUser = loggedUser; // Usa o setter
       return loggedUser !== null;
     } catch (error) {
       console.error('Erro no login:', error);
-      this.user = null;
+      this.currentUser = null;
       return false;
     }
   }
 
   logout(): void {
     authService.logout();
-    this.user = null;
+    this.currentUser = null; // Usa o setter para limpar tudo
   }
 
+  // Método privado para atualizar o estado interno e persistência
   private async persistUser(updatedUser: User): Promise<void> {
-    this.user = updatedUser;
-    localStorage.setItem('user', JSON.stringify(updatedUser));
+    this.currentUser = updatedUser; // Usa o setter
   }
 
   async toggleFavorite(productId: string): Promise<void> {
@@ -87,9 +99,7 @@ export class AuthViewModel {
       const updatedUser = { ...this.user, cart: [] };
       const response = await api.put(`users/${this.user.id}`, updatedUser);
 
-      this.user = response;
-      localStorage.setItem('user', JSON.stringify(response));
-
+      this.currentUser = response; // Usa o setter
       return true;
     } catch (error) {
       console.error("Erro ao processar pedido:", error);
@@ -100,12 +110,11 @@ export class AuthViewModel {
   async getUserOrders(): Promise<Order[]> {
     if (!this.user) return [];
     try {
-      // O json-server permite filtrar usando ?userId=X
       const response = await api.get(`orders?userId=${this.user.id}`);
       return Array.isArray(response) ? response : [];
     } catch (error) {
-      console.warn("Rota de pedidos não encontrada ou vazia. Retornando [].");
-      return []; // Retorna vazio em vez de estourar um erro no console
+      console.warn("Rota de pedidos não encontrada.");
+      return [];
     }
   }
 
@@ -115,7 +124,7 @@ export class AuthViewModel {
         ...this.user,
         ...updatedData
       });
-      
+
       await this.persistUser(response);
       return true;
     }
@@ -125,6 +134,5 @@ export class AuthViewModel {
     }
   }
 
-  getCurrentUser(): User | null { return this.user; }
   get isLoggedIn(): boolean { return this.user !== null; }
 }

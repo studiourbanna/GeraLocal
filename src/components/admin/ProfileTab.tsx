@@ -4,16 +4,15 @@ import { useTheme } from '@/contexts/ThemeContext';
 import { api } from '@/services/api';
 import { ProfileTabProps } from '@/models/User';
 
-// Aplicando a interface correta
 const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
-  const { user, login } = useAuth();
+  // ✅ Importamos updateUserLocally em vez de login
+  const { user, updateUserLocally } = useAuth();
   const { config, updateConfig } = useTheme();
 
   const [isEditing, setIsEditing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
 
-  // FormData com tipagem forte e fallbacks para evitar 'undefined'
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -22,7 +21,6 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
     accessibility: 'normal' as 'normal' | 'protanopia' | 'deuteranopia' | 'tritanopia'
   });
 
-  // Sincroniza dados com fallbacks seguros (?? '') para evitar erros de string | undefined
   useEffect(() => {
     if (user && config) {
       setFormData({
@@ -41,7 +39,6 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
 
     setIsSaving(true);
     try {
-      // Tipagem parcial para o update
       const userUpdateData: Record<string, string> = {
         name: formData.name,
         email: formData.email,
@@ -51,10 +48,14 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
         userUpdateData.password = formData.password;
       }
 
+      // 1. Atualiza no Backend (Patch para atualizar apenas campos enviados)
       const response = await api.patch(`users/${user.id}`, userUpdateData);
-      const updatedUser = response.data;
+      
+      // No json-server, o patch retorna o objeto atualizado. 
+      // Garantimos que pegamos os dados corretos da resposta.
+      const updatedUser = response.data || response;
 
-      // Atualiza o tema no contexto/localStorage
+      // 2. Atualiza as Preferências de Tema no Contexto de Tema
       if (config) {
         await updateConfig({
           ...config,
@@ -63,29 +64,26 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
         });
       }
 
-      // Mantém a senha para o login se não foi alterada
-      const currentPassword = formData.password.trim() !== '' 
-        ? formData.password 
-        : (user.password ?? '');
+      // 3. ✅ ATUALIZAÇÃO LOCAL: Sincroniza o AuthContext e o ViewModel
+      // Isso fará com que o Header e outros componentes reflitam a mudança na hora
+      updateUserLocally(updatedUser);
 
-      login(updatedUser, currentPassword);
-      
       setIsEditing(false);
       setFormData(prev => ({ ...prev, password: '' }));
       alert('Perfil e preferências atualizados com sucesso!');
     } catch (error) {
       console.error("Erro ao atualizar:", error);
-      alert('Erro ao salvar alterações.');
+      alert('Erro ao salvar alterações. Verifique sua conexão.');
     } finally {
       setIsSaving(false);
     }
   };
 
+  // Mantemos o JSX idêntico, garantindo apenas os fallbacks visuais
   return (
     <div id={id} className="max-w-2xl mx-auto py-6 animate-in fade-in duration-500">
       <div className="bg-white dark:bg-gray-800 rounded-3xl overflow-hidden shadow-sm border border-gray-100 dark:border-gray-700">
 
-        {/* Header Visual - Avatar dinâmico com fallback */}
         <div className="h-32 bg-gradient-to-r from-indigo-600 to-blue-500 relative">
           <div className="absolute -bottom-12 left-1/2 -translate-x-1/2">
             <div className="w-24 h-24 bg-white dark:bg-gray-800 rounded-full p-1 shadow-lg">
@@ -98,12 +96,11 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
 
         <div className="pt-16 p-8">
           <form onSubmit={handleUpdateProfile} className="space-y-6">
-
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-1">Nome Completo</label>
                 <input
-                  type="text" 
+                  type="text"
                   disabled={!isEditing}
                   value={formData.name}
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
@@ -113,7 +110,7 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest px-1">E-mail</label>
                 <input
-                  type="email" 
+                  type="email"
                   disabled={!isEditing}
                   value={formData.email}
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
@@ -145,7 +142,6 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
 
             <hr className="dark:border-gray-700" />
 
-            {/* PREFERÊNCIAS DE UI */}
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div className="space-y-2">
                 <label className="text-[10px] font-bold text-gray-400 uppercase tracking-widest flex items-center gap-1">
@@ -201,7 +197,19 @@ const ProfileTab: React.FC<ProfileTabProps> = ({ id }) => {
                   </button>
                   <button
                     type="button"
-                    onClick={() => setIsEditing(false)}
+                    onClick={() => {
+                      setIsEditing(false);
+                      // Resetamos o form para os valores originais do usuário
+                      if (user && config) {
+                        setFormData({
+                          name: user.name ?? '',
+                          email: user.email ?? '',
+                          password: '',
+                          theme: (config.theme as 'light' | 'dark') || 'light',
+                          accessibility: (config.accessibility as any) || 'normal'
+                        });
+                      }
+                    }}
                     className="px-8 py-3 bg-gray-100 dark:bg-gray-700 text-gray-600 dark:text-gray-300 rounded-xl font-bold hover:bg-gray-200"
                   >
                     Cancelar
